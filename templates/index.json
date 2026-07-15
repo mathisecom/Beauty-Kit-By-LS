@@ -170,14 +170,14 @@
         "stat_c9YWJd": {
           "type": "stat",
           "settings": {
-            "number": "2 *e-books*",
+            "number": "2 E-Books",
             "text": "Deux guides bonus offerts pour vendre sans forcer et tourner des Reels qui convertissent."
           }
         },
         "stat_W48hgj": {
           "type": "stat",
           "settings": {
-            "number": "1 *paiement*",
+            "number": "1 Paiement",
             "text": "Une seule commande, un accès à vie, aucun abonnement. Tout le nécessaire pour développer votre activité."
           }
         }
@@ -190,11 +190,11 @@
       "name": "Statement + statistiques",
       "settings": {
         "heading": "Un contenu soigné attire vos clientes *avant même* le premier rendez-vous.",
-        "size_title": 30,
+        "size_title": 28,
         "weight_title": "500",
         "size_number": 42,
-        "size_card_text": 15,
-        "mobile_scale": 85,
+        "size_card_text": 14,
+        "mobile_scale": 80,
         "page_bg": "#FFFFFF",
         "block_bg": "#191114",
         "text_color": "#FFFFFF",
@@ -209,16 +209,22 @@
         "orb_color": "#4A3038",
         "show_shadow": false,
         "block_radius": 28,
-        "gap_title_cards": 64,
-        "cards_max_width": 900,
+        "gap_title_cards": 36,
+        "cards_max_width": 1140,
         "padding_top": 4,
         "padding_bottom": 60,
-        "use_custom_fonts": true
+        "use_custom_fonts": false
       }
     },
     "featured_product_QNnQGY": {
       "type": "featured-product",
       "blocks": {
+        "liquid_GPHe6j": {
+          "type": "liquid",
+          "settings": {
+            "liquid": ""
+          }
+        },
         "title_z7TpLh": {
           "type": "title",
           "settings": {
@@ -297,6 +303,7 @@
         }
       },
       "block_order": [
+        "liquid_GPHe6j",
         "title_z7TpLh",
         "badges_wXpKDf",
         "price_xrVNC6",
@@ -365,6 +372,7 @@
         "166442457738b23caf-2",
         "item_VkdLEt"
       ],
+      "disabled": true,
       "settings": {
         "full_width": false,
         "subheading": "",

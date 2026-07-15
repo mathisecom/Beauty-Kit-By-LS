@@ -157,6 +157,65 @@
         "padding_bottom": 24
       }
     },
+    "statsuniq_8qdECM": {
+      "type": "statsuniq",
+      "blocks": {
+        "stat_cTMEQq": {
+          "type": "stat",
+          "settings": {
+            "number": "150",
+            "text": "Contenus prêts à publier : posts, stories, offres, scripts et phrases de vente réunis en un seul pack."
+          }
+        },
+        "stat_c9YWJd": {
+          "type": "stat",
+          "settings": {
+            "number": "2 *e-books*",
+            "text": "Deux guides bonus offerts pour vendre sans forcer et tourner des Reels qui convertissent."
+          }
+        },
+        "stat_W48hgj": {
+          "type": "stat",
+          "settings": {
+            "number": "1 *paiement*",
+            "text": "Une seule commande, un accès à vie, aucun abonnement. Tout le nécessaire pour développer votre activité."
+          }
+        }
+      },
+      "block_order": [
+        "stat_cTMEQq",
+        "stat_c9YWJd",
+        "stat_W48hgj"
+      ],
+      "name": "Statement + statistiques",
+      "settings": {
+        "heading": "Un contenu soigné attire vos clientes *avant même* le premier rendez-vous.",
+        "size_title": 30,
+        "weight_title": "500",
+        "size_number": 42,
+        "size_card_text": 15,
+        "mobile_scale": 85,
+        "page_bg": "#FFFFFF",
+        "block_bg": "#191114",
+        "text_color": "#FFFFFF",
+        "italic_color": "#F3B8CE",
+        "muted_color": "#B8A6AF",
+        "card_bg_color": "#2A1E24",
+        "card_border_color": "#3D2E35",
+        "show_glow": true,
+        "glow_color": "#C94577",
+        "glow_opacity": 35,
+        "show_orbs": true,
+        "orb_color": "#4A3038",
+        "show_shadow": false,
+        "block_radius": 28,
+        "gap_title_cards": 64,
+        "cards_max_width": 900,
+        "padding_top": 4,
+        "padding_bottom": 60,
+        "use_custom_fonts": true
+      }
+    },
     "featured_product_QNnQGY": {
       "type": "featured-product",
       "blocks": {
@@ -317,14 +376,14 @@
         "button_text": "",
         "button_url": "",
         "text_position": "center",
-        "background": "#FFFFFF",
+        "background": "#ffffff",
         "background_gradient": "",
         "text_color": "",
         "heading_color": "",
         "heading_gradient": "",
         "button_background": "",
         "button_text_color": "",
-        "accordion_background": "#FFFFFF",
+        "accordion_background": "#ffffff",
         "accordion_text_color": ""
       }
     }
@@ -332,6 +391,7 @@
   "order": [
     "slideshow",
     "packcontenue_DxQMJx",
+    "statsuniq_8qdECM",
     "featured_product_QNnQGY",
     "faq"
   ]

@@ -1,0 +1,270 @@
+{% comment %}
+  ============================================================
+  SECTION : Statement sombre + statistiques (glassmorphism)
+  ------------------------------------------------------------
+  Installation :
+  1. Shopify admin → Boutique en ligne → Thèmes → ⋯ → Modifier le code
+  2. Dossier "Sections" → "Ajouter une nouvelle section"
+  3. Nommer : statement-stats → coller tout ce fichier → Enregistrer
+  4. Éditeur de thème → "Ajouter une section" → "Statement + statistiques"
+  Tout est modifiable : textes, mots en italique, cartes stats,
+  tailles de typographie, couleurs, halo, ombre, espacements.
+  ------------------------------------------------------------
+  Astuce : dans le titre et les chiffres, entourez un mot de
+  *astérisques* pour le passer en italique rose.
+  Exemple : Un contenu soigné attire vos clientes *avant même* le
+  premier rendez-vous.
+  ============================================================
+{% endcomment %}
+
+{%- liquid
+  assign sid = section.id
+  assign use_fonts = section.settings.use_custom_fonts
+  assign ms = section.settings.mobile_scale | divided_by: 100.0
+-%}
+
+{%- if use_fonts -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+{%- endif -%}
+
+<style>
+  #stmt-{{ sid }}{
+    --st-page: {{ section.settings.page_bg }};
+    --st-bg: {{ section.settings.block_bg }};
+    --st-text: {{ section.settings.text_color }};
+    --st-muted: {{ section.settings.muted_color }};
+    --st-italic: {{ section.settings.italic_color }};
+    --st-glow: {{ section.settings.glow_color }};
+    --st-card-bg: {{ section.settings.card_bg_color }};
+    --st-card-line: {{ section.settings.card_border_color }};
+    --st-radius: {{ section.settings.block_radius }}px;
+    background: var(--st-page);
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    {%- if use_fonts -%}
+    font-family:'Host Grotesk',sans-serif;
+    {%- endif -%}
+    line-height:1.7;
+  }
+  #stmt-{{ sid }} *{margin:0;padding:0;box-sizing:border-box}
+  #stmt-{{ sid }} .st-wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+  #stmt-{{ sid }} .st-block{
+    background:var(--st-bg);
+    border-radius:var(--st-radius);
+    position:relative;overflow:hidden;
+    padding:100px 60px;text-align:center;color:var(--st-text);
+    {%- if section.settings.show_shadow -%}
+    box-shadow:0 30px 70px -40px rgba(34,24,32,.35);
+    {%- endif -%}
+  }
+
+  /* ---- Décor : orbes + halo ---- */
+  {%- if section.settings.show_orbs -%}
+  #stmt-{{ sid }} .st-orbs{position:absolute;inset:0;pointer-events:none}
+  #stmt-{{ sid }} .st-orbs i{
+    position:absolute;border-radius:50%;filter:blur(2px);opacity:.5;
+    background:radial-gradient(circle at 35% 30%, {{ section.settings.orb_color }}, var(--st-bg) 70%);
+  }
+  #stmt-{{ sid }} .st-orbs i:nth-child(1){width:130px;height:130px;top:12%;left:8%}
+  #stmt-{{ sid }} .st-orbs i:nth-child(2){width:70px;height:70px;top:60%;left:18%;opacity:.35}
+  #stmt-{{ sid }} .st-orbs i:nth-child(3){width:110px;height:110px;top:18%;right:10%;opacity:.4}
+  #stmt-{{ sid }} .st-orbs i:nth-child(4){width:60px;height:60px;bottom:14%;right:20%;opacity:.3}
+  {%- endif -%}
+  {%- if section.settings.show_glow -%}
+  #stmt-{{ sid }} .st-glow{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:600px;height:400px;filter:blur(90px);
+    opacity:{{ section.settings.glow_opacity | divided_by: 100.0 }};
+    pointer-events:none;
+    background:radial-gradient(circle,var(--st-glow) 0%,transparent 65%);
+  }
+  {%- endif -%}
+
+  /* ---- Titre ---- */
+  #stmt-{{ sid }} .st-title{
+    position:relative;
+    font-weight:{{ section.settings.weight_title }};
+    font-size:{{ section.settings.size_title }}px;
+    line-height:1.3;letter-spacing:-.02em;
+    max-width:21em;margin:0 auto {{ section.settings.gap_title_cards }}px;
+  }
+  #stmt-{{ sid }} .st-title em, #stmt-{{ sid }} .st-num em{
+    {%- if use_fonts -%}
+    font-family:'Playfair Display',serif;
+    {%- endif -%}
+    font-style:italic;font-weight:500;letter-spacing:0;
+    color:var(--st-italic);
+  }
+
+  /* ---- Cartes glass ---- */
+  #stmt-{{ sid }} .st-row{
+    position:relative;display:grid;
+    grid-template-columns:repeat({{ section.blocks.size | at_most: 4 | at_least: 1 }},1fr);
+    gap:24px;max-width:{{ section.settings.cards_max_width }}px;margin:0 auto;
+  }
+  #stmt-{{ sid }} .st-card{
+    background:var(--st-card-bg);
+    border:1px solid var(--st-card-line);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-radius:20px;padding:38px 26px;
+  }
+  #stmt-{{ sid }} .st-num{
+    font-weight:600;
+    font-size:{{ section.settings.size_number }}px;
+    line-height:1;letter-spacing:-.02em;margin-bottom:12px;
+  }
+  #stmt-{{ sid }} .st-card p{
+    font-size:{{ section.settings.size_card_text }}px;
+    color:var(--st-muted);line-height:1.6;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width:990px){
+    #stmt-{{ sid }} .st-block{padding:70px 36px}
+    #stmt-{{ sid }} .st-row{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:640px){
+    #stmt-{{ sid }} .st-wrap{padding:0 16px}
+    #stmt-{{ sid }} .st-block{padding:56px 22px;border-radius:calc(var(--st-radius) * .75)}
+    #stmt-{{ sid }} .st-row{grid-template-columns:1fr;max-width:420px;gap:16px}
+    #stmt-{{ sid }} .st-title{font-size:calc({{ section.settings.size_title }}px * {{ ms }});margin-bottom:calc({{ section.settings.gap_title_cards }}px * .7)}
+    #stmt-{{ sid }} .st-num{font-size:calc({{ section.settings.size_number }}px * {{ ms }})}
+    #stmt-{{ sid }} .st-card p{font-size:calc({{ section.settings.size_card_text }}px * {{ ms }})}
+    #stmt-{{ sid }} .st-card{padding:30px 22px}
+  }
+</style>
+
+<div id="stmt-{{ sid }}">
+  <div class="st-wrap">
+    <div class="st-block">
+      {%- if section.settings.show_orbs -%}
+      <div class="st-orbs" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      {%- endif -%}
+      {%- if section.settings.show_glow -%}
+      <div class="st-glow" aria-hidden="true"></div>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+      <h2 class="st-title">
+        {%- assign parts = section.settings.heading | split: '*' -%}
+        {%- for part in parts -%}
+          {%- assign idx = forloop.index0 | modulo: 2 -%}
+          {%- if idx == 1 -%}<em>{{ part }}</em>{%- else -%}{{ part }}{%- endif -%}
+        {%- endfor -%}
+      </h2>
+      {%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+      <div class="st-row">
+        {%- for block in section.blocks -%}
+        <div class="st-card" {{ block.shopify_attributes }}>
+          {%- if block.settings.number != blank -%}
+          <div class="st-num">
+            {%- assign nparts = block.settings.number | split: '*' -%}
+            {%- for part in nparts -%}
+              {%- assign nidx = forloop.index0 | modulo: 2 -%}
+              {%- if nidx == 1 -%}<em>{{ part }}</em>{%- else -%}{{ part }}{%- endif -%}
+            {%- endfor -%}
+          </div>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+          <p>{{ block.settings.text }}</p>
+          {%- endif -%}
+        </div>
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Statement + statistiques",
+  "tag": "section",
+  "class": "section-statement-stats",
+  "settings": [
+    { "type": "header", "content": "Titre" },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Titre",
+      "info": "Entourez un mot de *astérisques* pour le mettre en italique rose. Ex : vos clientes *avant même* le premier",
+      "default": "Un contenu soigné attire vos clientes *avant même* le premier rendez-vous."
+    },
+
+    { "type": "header", "content": "Typographie (tailles en px)" },
+    { "type": "range", "id": "size_title", "label": "Titre", "min": 20, "max": 64, "step": 1, "unit": "px", "default": 40 },
+    { "type": "select", "id": "weight_title", "label": "Graisse du titre", "default": "500", "options": [
+      { "value": "400", "label": "Normale (400)" },
+      { "value": "500", "label": "Moyenne (500)" },
+      { "value": "600", "label": "Semi-gras (600)" },
+      { "value": "700", "label": "Gras (700)" }
+    ] },
+    { "type": "range", "id": "size_number", "label": "Chiffres des cartes", "min": 20, "max": 64, "step": 1, "unit": "px", "default": 42 },
+    { "type": "range", "id": "size_card_text", "label": "Textes des cartes", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "mobile_scale", "label": "Échelle des textes sur mobile", "min": 70, "max": 100, "step": 5, "unit": "%", "default": 85 },
+
+    { "type": "header", "content": "Couleurs" },
+    { "type": "color", "id": "page_bg", "label": "Fond de la page", "default": "#F3EEEF" },
+    { "type": "color", "id": "block_bg", "label": "Fond du bloc", "default": "#191114" },
+    { "type": "color", "id": "text_color", "label": "Texte principal", "default": "#FFFFFF" },
+    { "type": "color", "id": "italic_color", "label": "Mots en italique", "default": "#F3B8CE" },
+    { "type": "color", "id": "muted_color", "label": "Texte des cartes", "default": "#B8A6AF" },
+    { "type": "color", "id": "card_bg_color", "label": "Fond des cartes", "default": "#2A1E24" },
+    { "type": "color", "id": "card_border_color", "label": "Bordure des cartes", "default": "#3D2E35" },
+
+    { "type": "header", "content": "Décor" },
+    { "type": "checkbox", "id": "show_glow", "label": "Afficher le halo central", "default": true },
+    { "type": "color", "id": "glow_color", "label": "Couleur du halo", "default": "#C94577" },
+    { "type": "range", "id": "glow_opacity", "label": "Intensité du halo", "min": 10, "max": 70, "step": 5, "unit": "%", "default": 35 },
+    { "type": "checkbox", "id": "show_orbs", "label": "Afficher les sphères décoratives", "default": true },
+    { "type": "color", "id": "orb_color", "label": "Couleur des sphères", "default": "#4A3038" },
+
+    { "type": "header", "content": "Mise en forme" },
+    { "type": "checkbox", "id": "show_shadow", "label": "Afficher l'ombre du bloc", "default": false },
+    { "type": "range", "id": "block_radius", "label": "Arrondi du bloc", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 28 },
+    { "type": "range", "id": "gap_title_cards", "label": "Espace titre / cartes", "min": 20, "max": 100, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "cards_max_width", "label": "Largeur max des cartes", "min": 600, "max": 1140, "step": 20, "unit": "px", "default": 900 },
+    { "type": "range", "id": "padding_top", "label": "Espace au-dessus", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "label": "Espace en dessous", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 60 },
+
+    { "type": "header", "content": "Polices" },
+    { "type": "checkbox", "id": "use_custom_fonts", "label": "Charger Host Grotesk + Playfair Display", "info": "Décochez pour utiliser la police de votre thème", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Carte statistique",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Chiffre",
+          "info": "Entourez un mot de *astérisques* pour l'italique rose. Ex : 2 *e-books*",
+          "default": "150"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Texte",
+          "default": "Contenus prêts à publier : posts, stories, offres, scripts et phrases de vente réunis en un seul pack."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Statement + statistiques",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "150", "text": "Contenus prêts à publier : posts, stories, offres, scripts et phrases de vente réunis en un seul pack." } },
+        { "type": "stat", "settings": { "number": "2 *e-books*", "text": "Deux guides bonus offerts pour vendre sans forcer et tourner des Reels qui convertissent." } },
+        { "type": "stat", "settings": { "number": "1 *paiement*", "text": "Une seule commande, un accès à vie, aucun abonnement. Tout le nécessaire pour développer votre activité." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

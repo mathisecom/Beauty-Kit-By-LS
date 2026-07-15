@@ -50,7 +50,9 @@
   #pack-{{ sid }} .pc-panel{
     background:var(--pc-card);
     border-radius:var(--pc-radius);
+    {%- if section.settings.show_shadow -%}
     box-shadow:0 1px 0 rgba(34,24,32,.03), 0 30px 70px -40px rgba(34,24,32,.14);
+    {%- endif -%}
     padding:70px 60px;
     display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;align-items:start;
   }
@@ -58,15 +60,15 @@
   /* ---- Colonne gauche ---- */
   #pack-{{ sid }} .pc-eyebrow{
     display:flex;align-items:center;gap:14px;
-    font-size:.72rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+    font-size:{{ section.settings.size_eyebrow }}px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
     color:var(--pc-muted);margin-bottom:22px;
   }
   #pack-{{ sid }} .pc-eyebrow::after{content:"";height:1px;width:36px;background:var(--pc-muted);opacity:.4;order:2}
   #pack-{{ sid }} .pc-eyebrow .n{order:1;color:var(--pc-ink)}
   #pack-{{ sid }} .pc-eyebrow .t{order:3}
   #pack-{{ sid }} h2.pc-title{
-    font-weight:600;
-    font-size:clamp(1.5rem,2.6vw,2.2rem);
+    font-weight:{{ section.settings.weight_title }};
+    font-size:{{ section.settings.size_title }}px;
     line-height:1.26;letter-spacing:-.02em;
   }
   #pack-{{ sid }} .pc-title em{
@@ -75,11 +77,11 @@
     {%- endif -%}
     font-style:italic;font-weight:500;letter-spacing:0;
   }
-  #pack-{{ sid }} .pc-desc{color:var(--pc-muted);margin:18px 0 28px;max-width:26em;font-size:.97rem}
+  #pack-{{ sid }} .pc-desc{color:var(--pc-muted);margin:18px 0 28px;max-width:26em;font-size:{{ section.settings.size_desc }}px}
   #pack-{{ sid }} .pc-btn{
     display:inline-flex;align-items:center;gap:12px;
     background:var(--pc-btn-bg);color:var(--pc-btn-txt);
-    font-size:.78rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+    font-size:{{ section.settings.size_btn }}px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
     padding:14px 8px 14px 26px;border-radius:999px;text-decoration:none;
     transition:background .25s ease,transform .25s ease;
   }
@@ -99,7 +101,7 @@
     list-style:none;cursor:pointer;
     display:flex;align-items:center;gap:18px;
     padding:22px 4px;
-    font-weight:500;font-size:1.02rem;
+    font-weight:500;font-size:{{ section.settings.size_item }}px;
     transition:padding-left .25s ease,color .2s ease;
   }
   #pack-{{ sid }} summary::-webkit-details-marker{display:none}
@@ -111,7 +113,7 @@
   }
   #pack-{{ sid }} .pc-ic img{width:100%;height:100%;object-fit:cover;border-radius:12px}
   #pack-{{ sid }} .pc-qty{
-    margin-left:auto;font-size:.78rem;font-weight:500;letter-spacing:.1em;
+    margin-left:auto;font-size:{{ section.settings.size_qty }}px;font-weight:500;letter-spacing:.1em;
     color:var(--pc-muted);white-space:nowrap;
   }
   #pack-{{ sid }} .pc-plus{
@@ -124,7 +126,7 @@
     transform:rotate(45deg);
     background:var(--pc-btn-bg);color:var(--pc-btn-txt);border-color:var(--pc-btn-bg);
   }
-  #pack-{{ sid }} .pc-body{padding:0 4px 26px 60px;color:var(--pc-muted);font-size:.94rem;max-width:34em}
+  #pack-{{ sid }} .pc-body{padding:0 4px 26px 60px;color:var(--pc-muted);font-size:{{ section.settings.size_body }}px;max-width:34em}
 
   /* ---- Responsive ---- */
   @media (max-width:990px){
@@ -133,10 +135,12 @@
   @media (max-width:640px){
     #pack-{{ sid }} .pc-panel{padding:40px 22px;border-radius:calc(var(--pc-radius) * .75)}
     #pack-{{ sid }} .pc-wrap{padding:0 16px}
-    #pack-{{ sid }} summary{gap:12px;font-size:.94rem;padding:18px 2px}
+    #pack-{{ sid }} h2.pc-title{font-size:calc({{ section.settings.size_title }}px * {{ section.settings.mobile_scale | divided_by: 100.0 }})}
+    #pack-{{ sid }} .pc-desc{font-size:calc({{ section.settings.size_desc }}px * {{ section.settings.mobile_scale | divided_by: 100.0 }})}
+    #pack-{{ sid }} summary{gap:12px;padding:18px 2px;font-size:calc({{ section.settings.size_item }}px * {{ section.settings.mobile_scale | divided_by: 100.0 }})}
+    #pack-{{ sid }} .pc-body{padding-left:48px;font-size:calc({{ section.settings.size_body }}px * {{ section.settings.mobile_scale | divided_by: 100.0 }})}
     #pack-{{ sid }} .pc-ic{width:34px;height:34px}
-    #pack-{{ sid }} .pc-body{padding-left:48px}
-    #pack-{{ sid }} .pc-qty{font-size:.72rem}
+    #pack-{{ sid }} .pc-qty{font-size:calc({{ section.settings.size_qty }}px * {{ section.settings.mobile_scale | divided_by: 100.0 }})}
   }
   @media (prefers-reduced-motion:reduce){
     #pack-{{ sid }} *{transition:none!important}
@@ -252,6 +256,22 @@
     { "type": "checkbox", "id": "exclusive_accordion", "label": "Un seul élément ouvert à la fois", "default": true },
     { "type": "checkbox", "id": "use_custom_fonts", "label": "Charger Host Grotesk + Playfair Display", "info": "Décochez pour utiliser la police de votre thème", "default": true },
 
+    { "type": "header", "content": "Typographie (tailles en px)" },
+    { "type": "range", "id": "size_title", "label": "Titre", "min": 18, "max": 60, "step": 1, "unit": "px", "default": 35 },
+    { "type": "select", "id": "weight_title", "label": "Graisse du titre", "default": "600", "options": [
+      { "value": "400", "label": "Normale (400)" },
+      { "value": "500", "label": "Moyenne (500)" },
+      { "value": "600", "label": "Semi-gras (600)" },
+      { "value": "700", "label": "Gras (700)" }
+    ] },
+    { "type": "range", "id": "size_eyebrow", "label": "Sur-titre", "min": 8, "max": 18, "step": 1, "unit": "px", "default": 11 },
+    { "type": "range", "id": "size_desc", "label": "Description", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "size_item", "label": "Titres de l'accordéon", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "size_body", "label": "Textes dépliés", "min": 11, "max": 20, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "size_qty", "label": "Quantités (× 30)", "min": 9, "max": 16, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "size_btn", "label": "Texte du bouton", "min": 9, "max": 16, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "mobile_scale", "label": "Échelle des textes sur mobile", "min": 70, "max": 100, "step": 5, "unit": "%", "default": 90 },
+
     { "type": "header", "content": "Couleurs" },
     { "type": "color", "id": "bg_color", "label": "Fond de la page", "default": "#F3EEEF" },
     { "type": "color", "id": "card_color", "label": "Fond du panneau", "default": "#FFFFFF" },
@@ -264,6 +284,7 @@
     { "type": "color", "id": "btn_text_color", "label": "Texte du bouton", "default": "#FFFFFF" },
 
     { "type": "header", "content": "Mise en forme" },
+    { "type": "checkbox", "id": "show_shadow", "label": "Afficher l'ombre du panneau", "default": false },
     { "type": "range", "id": "card_radius", "label": "Arrondi du panneau", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 28 },
     { "type": "range", "id": "padding_top", "label": "Espace au-dessus", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 60 },
     { "type": "range", "id": "padding_bottom", "label": "Espace en dessous", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 60 }

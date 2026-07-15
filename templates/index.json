@@ -50,6 +50,105 @@
         "background_gradient": "linear-gradient(60deg, rgba(60, 65, 68, 1), rgba(23, 29, 33, 1) 98%)"
       }
     },
+    "featured_product_QNnQGY": {
+      "type": "featured-product",
+      "blocks": {
+        "title_z7TpLh": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h2"
+          }
+        },
+        "badges_wXpKDf": {
+          "type": "badges",
+          "settings": {}
+        },
+        "price_xrVNC6": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "rating_gJbL9B": {
+          "type": "rating",
+          "settings": {
+            "show_empty": false
+          }
+        },
+        "separator_cGqzp9": {
+          "type": "separator",
+          "settings": {}
+        },
+        "description_taqJFc": {
+          "type": "description",
+          "settings": {
+            "icon": "none",
+            "icon_width": 20,
+            "collapse_content": false
+          }
+        },
+        "variant_picker_VEVgMn": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "stack_blocks": true,
+            "selector_style": "block",
+            "swatch_selector_style": "swatch",
+            "variant_image_options": "",
+            "size_chart_page": ""
+          }
+        },
+        "quantity_selector_bhpta4": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons_cQkj6r": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": false,
+            "show_gift_card_recipient": false,
+            "atc_button_background": "",
+            "atc_button_text_color": "",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "pickup_availability_kLwLCa": {
+          "type": "pickup_availability",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "title_z7TpLh",
+        "badges_wXpKDf",
+        "price_xrVNC6",
+        "rating_gJbL9B",
+        "separator_cGqzp9",
+        "description_taqJFc",
+        "variant_picker_VEVgMn",
+        "quantity_selector_bhpta4",
+        "buy_buttons_cQkj6r",
+        "pickup_availability_kLwLCa"
+      ],
+      "name": "Featured product",
+      "settings": {
+        "full_width": true,
+        "product": "pack-reseaux-sociaux-beauty-kit-by-ls",
+        "desktop_media_width": 55,
+        "desktop_media_layout": "carousel_thumbnails_left",
+        "mobile_media_size": "contained",
+        "mobile_carousel_control": "thumbnails",
+        "enable_video_autoplay": true,
+        "enable_video_looping": false,
+        "enable_image_zoom": false,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
     "faq": {
       "type": "faq",
       "blocks": {
@@ -106,6 +205,7 @@
   },
   "order": [
     "slideshow",
+    "featured_product_QNnQGY",
     "faq"
   ]
 }

@@ -69,16 +69,6 @@
             "show_taxes_notice": false
           }
         },
-        "rating_gJbL9B": {
-          "type": "rating",
-          "settings": {
-            "show_empty": false
-          }
-        },
-        "separator_cGqzp9": {
-          "type": "separator",
-          "settings": {}
-        },
         "description_taqJFc": {
           "type": "description",
           "settings": {
@@ -122,8 +112,6 @@
         "title_z7TpLh",
         "badges_wXpKDf",
         "price_xrVNC6",
-        "rating_gJbL9B",
-        "separator_cGqzp9",
         "description_taqJFc",
         "variant_picker_VEVgMn",
         "quantity_selector_bhpta4",

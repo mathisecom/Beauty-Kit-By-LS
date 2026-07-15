@@ -1,0 +1,314 @@
+{% comment %}
+  ============================================================
+  SECTION : Contenu du pack (accordéon)
+  ------------------------------------------------------------
+  Installation :
+  1. Dans Shopify admin → Boutique en ligne → Thèmes → ⋯ → Modifier le code
+  2. Dossier "Sections" → "Ajouter une nouvelle section"
+  3. Nommer : pack-contenu  → coller tout ce fichier → Enregistrer
+  4. Dans l'éditeur de thème → "Ajouter une section" → "Contenu du pack"
+  Tout est modifiable dans l'éditeur : textes, couleurs, icônes,
+  quantités, bouton, polices, espacements.
+  ============================================================
+{% endcomment %}
+
+{%- liquid
+  assign sid = section.id
+  assign use_fonts = section.settings.use_custom_fonts
+-%}
+
+{%- if use_fonts -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+{%- endif -%}
+
+<style>
+  #pack-{{ sid }}{
+    --pc-bg: {{ section.settings.bg_color }};
+    --pc-card: {{ section.settings.card_color }};
+    --pc-ink: {{ section.settings.text_color }};
+    --pc-muted: {{ section.settings.muted_color }};
+    --pc-line: {{ section.settings.line_color }};
+    --pc-accent: {{ section.settings.accent_color }};
+    --pc-accent-soft: {{ section.settings.accent_soft_color }};
+    --pc-btn-bg: {{ section.settings.btn_bg }};
+    --pc-btn-txt: {{ section.settings.btn_text_color }};
+    --pc-radius: {{ section.settings.card_radius }}px;
+    background: var(--pc-bg);
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    {%- if use_fonts -%}
+    font-family:'Host Grotesk',sans-serif;
+    {%- endif -%}
+    color: var(--pc-ink);
+    line-height:1.7;
+  }
+  #pack-{{ sid }} *{margin:0;padding:0;box-sizing:border-box}
+  #pack-{{ sid }} .pc-wrap{
+    max-width:1200px;margin:0 auto;padding:0 28px;
+  }
+  #pack-{{ sid }} .pc-panel{
+    background:var(--pc-card);
+    border-radius:var(--pc-radius);
+    box-shadow:0 1px 0 rgba(34,24,32,.03), 0 30px 70px -40px rgba(34,24,32,.14);
+    padding:70px 60px;
+    display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;align-items:start;
+  }
+
+  /* ---- Colonne gauche ---- */
+  #pack-{{ sid }} .pc-eyebrow{
+    display:flex;align-items:center;gap:14px;
+    font-size:.72rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--pc-muted);margin-bottom:22px;
+  }
+  #pack-{{ sid }} .pc-eyebrow::after{content:"";height:1px;width:36px;background:var(--pc-muted);opacity:.4;order:2}
+  #pack-{{ sid }} .pc-eyebrow .n{order:1;color:var(--pc-ink)}
+  #pack-{{ sid }} .pc-eyebrow .t{order:3}
+  #pack-{{ sid }} h2.pc-title{
+    font-weight:600;
+    font-size:clamp(1.5rem,2.6vw,2.2rem);
+    line-height:1.26;letter-spacing:-.02em;
+  }
+  #pack-{{ sid }} .pc-title em{
+    {%- if use_fonts -%}
+    font-family:'Playfair Display',serif;
+    {%- endif -%}
+    font-style:italic;font-weight:500;letter-spacing:0;
+  }
+  #pack-{{ sid }} .pc-desc{color:var(--pc-muted);margin:18px 0 28px;max-width:26em;font-size:.97rem}
+  #pack-{{ sid }} .pc-btn{
+    display:inline-flex;align-items:center;gap:12px;
+    background:var(--pc-btn-bg);color:var(--pc-btn-txt);
+    font-size:.78rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+    padding:14px 8px 14px 26px;border-radius:999px;text-decoration:none;
+    transition:background .25s ease,transform .25s ease;
+  }
+  #pack-{{ sid }} .pc-btn .arr{
+    width:32px;height:32px;border-radius:50%;
+    background:var(--pc-btn-txt);color:var(--pc-btn-bg);
+    display:flex;align-items:center;justify-content:center;
+    font-size:.9rem;transition:transform .25s ease;
+  }
+  #pack-{{ sid }} .pc-btn:hover{background:var(--pc-accent);transform:translateY(-2px)}
+  #pack-{{ sid }} .pc-btn:hover .arr{transform:rotate(45deg)}
+
+  /* ---- Accordéon ---- */
+  #pack-{{ sid }} .pc-acc{border-top:1px solid var(--pc-line)}
+  #pack-{{ sid }} details{border-bottom:1px solid var(--pc-line)}
+  #pack-{{ sid }} summary{
+    list-style:none;cursor:pointer;
+    display:flex;align-items:center;gap:18px;
+    padding:22px 4px;
+    font-weight:500;font-size:1.02rem;
+    transition:padding-left .25s ease,color .2s ease;
+  }
+  #pack-{{ sid }} summary::-webkit-details-marker{display:none}
+  #pack-{{ sid }} summary:hover{padding-left:12px;color:var(--pc-accent)}
+  #pack-{{ sid }} .pc-ic{
+    flex-shrink:0;width:38px;height:38px;border-radius:12px;
+    background:var(--pc-accent-soft);color:var(--pc-accent);
+    display:flex;align-items:center;justify-content:center;overflow:hidden;
+  }
+  #pack-{{ sid }} .pc-ic img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+  #pack-{{ sid }} .pc-qty{
+    margin-left:auto;font-size:.78rem;font-weight:500;letter-spacing:.1em;
+    color:var(--pc-muted);white-space:nowrap;
+  }
+  #pack-{{ sid }} .pc-plus{
+    flex-shrink:0;width:30px;height:30px;border-radius:50%;
+    border:1px solid var(--pc-line);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1rem;color:var(--pc-ink);transition:all .25s ease;
+  }
+  #pack-{{ sid }} details[open] .pc-plus{
+    transform:rotate(45deg);
+    background:var(--pc-btn-bg);color:var(--pc-btn-txt);border-color:var(--pc-btn-bg);
+  }
+  #pack-{{ sid }} .pc-body{padding:0 4px 26px 60px;color:var(--pc-muted);font-size:.94rem;max-width:34em}
+
+  /* ---- Responsive ---- */
+  @media (max-width:990px){
+    #pack-{{ sid }} .pc-panel{grid-template-columns:1fr;gap:40px;padding:52px 36px}
+  }
+  @media (max-width:640px){
+    #pack-{{ sid }} .pc-panel{padding:40px 22px;border-radius:calc(var(--pc-radius) * .75)}
+    #pack-{{ sid }} .pc-wrap{padding:0 16px}
+    #pack-{{ sid }} summary{gap:12px;font-size:.94rem;padding:18px 2px}
+    #pack-{{ sid }} .pc-ic{width:34px;height:34px}
+    #pack-{{ sid }} .pc-body{padding-left:48px}
+    #pack-{{ sid }} .pc-qty{font-size:.72rem}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #pack-{{ sid }} *{transition:none!important}
+  }
+</style>
+
+<div id="pack-{{ sid }}">
+  <div class="pc-wrap">
+    <div class="pc-panel">
+
+      <div class="pc-left">
+        {%- if section.settings.eyebrow_number != blank or section.settings.eyebrow_text != blank -%}
+        <div class="pc-eyebrow">
+          <span class="n">{{ section.settings.eyebrow_number }}</span>
+          <span class="t">{{ section.settings.eyebrow_text }}</span>
+        </div>
+        {%- endif -%}
+
+        <h2 class="pc-title">
+          {{ section.settings.heading }}
+          {%- if section.settings.heading_italic != blank %} <em>{{ section.settings.heading_italic }}</em>{% endif -%}
+        </h2>
+
+        {%- if section.settings.description != blank -%}
+        <p class="pc-desc">{{ section.settings.description }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.button_label != blank -%}
+        <a class="pc-btn" href="{{ section.settings.button_link | default: '#' }}">
+          {{ section.settings.button_label }}<span class="arr">&rarr;</span>
+        </a>
+        {%- endif -%}
+      </div>
+
+      <div class="pc-acc">
+        {%- for block in section.blocks -%}
+        <details {% if block.settings.open_default %}open{% endif %} {{ block.shopify_attributes }}>
+          <summary>
+            <span class="pc-ic">
+              {%- if block.settings.custom_icon != blank -%}
+                <img src="{{ block.settings.custom_icon | image_url: width: 76 }}" alt="" loading="lazy" width="38" height="38">
+              {%- else -%}
+                {%- case block.settings.icon -%}
+                  {%- when 'person' -%}
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="10" r="3"/><path d="M6 19c1.5-3 4-4 6-4s4.5 1 6 4"/></svg>
+                  {%- when 'phone' -%}
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 5h4"/></svg>
+                  {%- when 'tag' -%}
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 12l-8.5 8.5a3.5 3.5 0 01-5-5L15 7"/><circle cx="17.5" cy="6.5" r="3.5"/></svg>
+                  {%- when 'video' -%}
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="4"/><path d="M10 9l5 3-5 3z"/></svg>
+                  {%- when 'chat' -%}
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12a8.5 8.5 0 01-12.4 7.5L3 21l1.6-5A8.5 8.5 0 1121 12z"/></svg>
+                  {%- when 'clock' -%}
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                  {%- when 'star' -%}
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l2.4 4.8L20 9l-4 3.9.9 5.6L12 15.8 7.1 18.5 8 12.9 4 9l5.6-1.2z"/></svg>
+                  {%- when 'heart' -%}
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 20s-7-4.5-9-9a5 5 0 019-3 5 5 0 019 3c-2 4.5-9 9-9 9z"/></svg>
+                {%- endcase -%}
+              {%- endif -%}
+            </span>
+            {{ block.settings.title }}
+            {%- if block.settings.quantity != blank -%}
+            <span class="pc-qty">{{ block.settings.quantity }}</span>
+            {%- endif -%}
+            <span class="pc-plus">+</span>
+          </summary>
+          {%- if block.settings.text != blank -%}
+          <div class="pc-body">{{ block.settings.text }}</div>
+          {%- endif -%}
+        </details>
+        {%- endfor -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var root = document.getElementById('pack-{{ sid }}');
+  if(!root) return;
+  {%- if section.settings.exclusive_accordion -%}
+  var items = root.querySelectorAll('details');
+  items.forEach(function(d){
+    d.addEventListener('toggle', function(){
+      if(d.open){ items.forEach(function(o){ if(o !== d) o.open = false; }); }
+    });
+  });
+  {%- endif -%}
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Contenu du pack",
+  "tag": "section",
+  "class": "section-pack-contenu",
+  "settings": [
+    { "type": "header", "content": "Textes" },
+    { "type": "text", "id": "eyebrow_number", "label": "Numéro (ex : 02)", "default": "02" },
+    { "type": "text", "id": "eyebrow_text", "label": "Sur-titre", "default": "Ce que contient le pack" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Tout le contenu dont vous avez besoin," },
+    { "type": "text", "id": "heading_italic", "label": "Fin du titre en italique", "default": "déjà prêt." },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Fini la page blanche devant Instagram. Chaque élément est pensé pour votre métier, vos prestations et vos clientes." },
+
+    { "type": "header", "content": "Bouton" },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton", "default": "Obtenir le pack" },
+    { "type": "url", "id": "button_link", "label": "Lien du bouton" },
+
+    { "type": "header", "content": "Comportement" },
+    { "type": "checkbox", "id": "exclusive_accordion", "label": "Un seul élément ouvert à la fois", "default": true },
+    { "type": "checkbox", "id": "use_custom_fonts", "label": "Charger Host Grotesk + Playfair Display", "info": "Décochez pour utiliser la police de votre thème", "default": true },
+
+    { "type": "header", "content": "Couleurs" },
+    { "type": "color", "id": "bg_color", "label": "Fond de la page", "default": "#F3EEEF" },
+    { "type": "color", "id": "card_color", "label": "Fond du panneau", "default": "#FFFFFF" },
+    { "type": "color", "id": "text_color", "label": "Texte principal", "default": "#221820" },
+    { "type": "color", "id": "muted_color", "label": "Texte secondaire", "default": "#6F6068" },
+    { "type": "color", "id": "line_color", "label": "Lignes de séparation", "default": "#E7DDE1" },
+    { "type": "color", "id": "accent_color", "label": "Couleur d'accent", "default": "#C94577" },
+    { "type": "color", "id": "accent_soft_color", "label": "Fond des icônes", "default": "#F6DEE8" },
+    { "type": "color", "id": "btn_bg", "label": "Fond du bouton", "default": "#221820" },
+    { "type": "color", "id": "btn_text_color", "label": "Texte du bouton", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Mise en forme" },
+    { "type": "range", "id": "card_radius", "label": "Arrondi du panneau", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 28 },
+    { "type": "range", "id": "padding_top", "label": "Espace au-dessus", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "label": "Espace en dessous", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Élément du pack",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Templates de posts Instagram & Facebook" },
+        { "type": "text", "id": "quantity", "label": "Quantité (ex : × 30)", "default": "× 30" },
+        { "type": "textarea", "id": "text", "label": "Description dépliée", "default": "Des visuels élégants pour présenter vos prestations, vos réalisations avant/après et vos avis clientes." },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icône",
+          "default": "person",
+          "options": [
+            { "value": "person", "label": "Portrait / Post" },
+            { "value": "phone", "label": "Téléphone / Story" },
+            { "value": "tag", "label": "Étiquette / Promo" },
+            { "value": "video", "label": "Vidéo / Reel" },
+            { "value": "chat", "label": "Bulle / Message" },
+            { "value": "clock", "label": "Horloge" },
+            { "value": "star", "label": "Étoile" },
+            { "value": "heart", "label": "Cœur" }
+          ]
+        },
+        { "type": "image_picker", "id": "custom_icon", "label": "Icône personnalisée (optionnel)", "info": "Remplace l'icône ci-dessus si renseignée" },
+        { "type": "checkbox", "id": "open_default", "label": "Ouvert par défaut", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contenu du pack",
+      "blocks": [
+        { "type": "item", "settings": { "title": "Templates de posts Instagram & Facebook", "quantity": "× 30", "icon": "person", "open_default": true, "text": "Des visuels élégants pour présenter vos prestations, vos réalisations avant/après et vos avis clientes — pensés pour un feed cohérent et professionnel." } },
+        { "type": "item", "settings": { "title": "Templates de stories", "quantity": "× 30", "icon": "phone", "text": "Des stories engageantes pour rester présente au quotidien : coulisses, disponibilités, questions/réponses, rappels de réservation." } },
+        { "type": "item", "settings": { "title": "Templates d'offres promotionnelles", "quantity": "× 10", "icon": "tag", "text": "Des visuels d'offres structurées et irrésistibles qui donnent envie de réserver immédiatement — sans brader votre travail." } },
+        { "type": "item", "settings": { "title": "Scripts de Reels avec hooks", "quantity": "× 30", "icon": "video", "text": "Des scripts prêts à tourner, avec le hook, le déroulé et l'appel à l'action — pour capter l'attention dès la première seconde." } },
+        { "type": "item", "settings": { "title": "Phrases de vente sans forcer", "quantity": "× 50", "icon": "chat", "text": "Des formulations naturelles pour promouvoir vos prestations en douceur, dans vos légendes, vos stories et vos messages privés." } },
+        { "type": "item", "settings": { "title": "100 % personnalisable", "quantity": "∞", "icon": "clock", "text": "Vos couleurs, vos photos, vos tarifs, votre identité visuelle : chaque template s'adapte à votre marque en quelques clics." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

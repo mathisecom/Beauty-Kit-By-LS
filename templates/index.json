@@ -131,7 +131,7 @@
         "description": "Fini la page blanche devant Instagram. Chaque élément est pensé pour votre métier, vos prestations et vos clientes.",
         "button_label": "Obtenir le pack",
         "button_link": "#shopify-section-template--22122118742270__featured_product_QNnQGY",
-        "exclusive_accordion": true,
+        "exclusive_accordion": false,
         "use_custom_fonts": true,
         "size_title": 27,
         "weight_title": "600",

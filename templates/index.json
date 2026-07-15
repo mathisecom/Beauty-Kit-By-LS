@@ -163,8 +163,8 @@
         "stat_cTMEQq": {
           "type": "stat",
           "settings": {
-            "number": "150",
-            "text": "Contenus prêts à publier : posts, stories, offres, scripts et phrases de vente réunis en un seul pack."
+            "number": "150 Contenus",
+            "text": "Prêts à publier : posts, stories, offres, scripts et phrases de vente réunis en un seul pack."
           }
         },
         "stat_c9YWJd": {
@@ -192,7 +192,7 @@
         "heading": "Un contenu soigné attire vos clientes *avant même* le premier rendez-vous.",
         "size_title": 28,
         "weight_title": "500",
-        "size_number": 42,
+        "size_number": 32,
         "size_card_text": 14,
         "mobile_scale": 80,
         "page_bg": "#FFFFFF",

@@ -195,18 +195,18 @@
         "size_number": 32,
         "size_card_text": 14,
         "mobile_scale": 80,
-        "page_bg": "#FFFFFF",
+        "page_bg": "#ffffff",
         "block_bg": "#191114",
-        "text_color": "#FFFFFF",
-        "italic_color": "#F3B8CE",
-        "muted_color": "#B8A6AF",
-        "card_bg_color": "#2A1E24",
-        "card_border_color": "#3D2E35",
+        "text_color": "#ffffff",
+        "italic_color": "#f3b8ce",
+        "muted_color": "#b8a6af",
+        "card_bg_color": "#2a1e24",
+        "card_border_color": "#3d2e35",
         "show_glow": true,
-        "glow_color": "#C94577",
+        "glow_color": "#c94577",
         "glow_opacity": 35,
         "show_orbs": true,
-        "orb_color": "#4A3038",
+        "orb_color": "#4a3038",
         "show_shadow": false,
         "block_radius": 28,
         "gap_title_cards": 36,
@@ -394,6 +394,42 @@
         "accordion_background": "#ffffff",
         "accordion_text_color": ""
       }
+    },
+    "ctafinal_LngjTF": {
+      "type": "ctafinal",
+      "name": "Appel à l'action final",
+      "settings": {
+        "heading": "Votre prochain post est *déjà prêt.*\nIl ne manque que vous.",
+        "subheading": "Rejoignez les professionnelles de la beauté qui publient du contenu qui attire, sans y passer leurs soirées.",
+        "note": "",
+        "button_label": "Obtenir le pack à 39 €",
+        "button_link": "#shopify-section-template--22122118742270__featured_product_QNnQGY",
+        "size_title": 35,
+        "weight_title": "600",
+        "size_sub": 16,
+        "size_btn": 12,
+        "size_note": 13,
+        "mobile_scale": 80,
+        "page_bg": "#FFFFFF",
+        "text_color": "#221820",
+        "italic_color": "#221820",
+        "muted_color": "#6F6068",
+        "btn_bg": "#C94577",
+        "btn_hover_bg": "#221820",
+        "btn_text_color": "#FFFFFF",
+        "show_blob": true,
+        "blob_animate": true,
+        "blob_color_1": "#F9C6D9",
+        "blob_color_2": "#F3D9B8",
+        "blob_color_3": "#E3C4F0",
+        "blob_opacity": 45,
+        "gap_sub_btn": 40,
+        "btn_padding_v": 14,
+        "btn_padding_h": 26,
+        "padding_top": 112,
+        "padding_bottom": 88,
+        "use_custom_fonts": false
+      }
     }
   },
   "order": [
@@ -401,6 +437,7 @@
     "packcontenue_DxQMJx",
     "statsuniq_8qdECM",
     "featured_product_QNnQGY",
-    "faq"
+    "faq",
+    "ctafinal_LngjTF"
   ]
 }

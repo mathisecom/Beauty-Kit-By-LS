@@ -50,6 +50,103 @@
         "background_gradient": "linear-gradient(60deg, rgba(60, 65, 68, 1), rgba(23, 29, 33, 1) 98%)"
       }
     },
+    "packcontenue_DxQMJx": {
+      "type": "packcontenue",
+      "blocks": {
+        "item_WPQ3ct": {
+          "type": "item",
+          "settings": {
+            "title": "Templates de posts Instagram & Facebook",
+            "quantity": "× 30",
+            "text": "Des visuels élégants pour présenter vos prestations, vos réalisations avant/après et vos avis clientes — pensés pour un feed cohérent et professionnel.",
+            "icon": "person",
+            "open_default": true
+          }
+        },
+        "item_RNFJGd": {
+          "type": "item",
+          "settings": {
+            "title": "Templates de stories",
+            "quantity": "× 30",
+            "text": "Des stories engageantes pour rester présente au quotidien : coulisses, disponibilités, questions/réponses, rappels de réservation.",
+            "icon": "phone",
+            "open_default": false
+          }
+        },
+        "item_8WnUM7": {
+          "type": "item",
+          "settings": {
+            "title": "Templates d'offres promotionnelles",
+            "quantity": "× 10",
+            "text": "Des visuels d'offres structurées et irrésistibles qui donnent envie de réserver immédiatement — sans brader votre travail.",
+            "icon": "tag",
+            "open_default": false
+          }
+        },
+        "item_FhfeK6": {
+          "type": "item",
+          "settings": {
+            "title": "Scripts de Reels avec hooks",
+            "quantity": "× 30",
+            "text": "Des scripts prêts à tourner, avec le hook, le déroulé et l'appel à l'action — pour capter l'attention dès la première seconde.",
+            "icon": "video",
+            "open_default": false
+          }
+        },
+        "item_4tiW7L": {
+          "type": "item",
+          "settings": {
+            "title": "Phrases de vente sans forcer",
+            "quantity": "× 50",
+            "text": "Des formulations naturelles pour promouvoir vos prestations en douceur, dans vos légendes, vos stories et vos messages privés.",
+            "icon": "chat",
+            "open_default": false
+          }
+        },
+        "item_JKiRDj": {
+          "type": "item",
+          "settings": {
+            "title": "100 % personnalisable",
+            "quantity": "∞",
+            "text": "Vos couleurs, vos photos, vos tarifs, votre identité visuelle : chaque template s'adapte à votre marque en quelques clics.",
+            "icon": "clock",
+            "open_default": false
+          }
+        }
+      },
+      "block_order": [
+        "item_WPQ3ct",
+        "item_RNFJGd",
+        "item_8WnUM7",
+        "item_FhfeK6",
+        "item_4tiW7L",
+        "item_JKiRDj"
+      ],
+      "name": "Contenu du pack",
+      "settings": {
+        "eyebrow_number": "",
+        "eyebrow_text": "",
+        "heading": "Tout le contenu dont vous avez besoin,",
+        "heading_italic": "déjà prêt.",
+        "description": "Fini la page blanche devant Instagram. Chaque élément est pensé pour votre métier, vos prestations et vos clientes.",
+        "button_label": "Obtenir le pack",
+        "button_link": "",
+        "exclusive_accordion": true,
+        "use_custom_fonts": true,
+        "bg_color": "#FFFFFF",
+        "card_color": "#FFFFFF",
+        "text_color": "#221820",
+        "muted_color": "#6F6068",
+        "line_color": "#E7DDE1",
+        "accent_color": "#C94577",
+        "accent_soft_color": "#F6DEE8",
+        "btn_bg": "#221820",
+        "btn_text_color": "#FFFFFF",
+        "card_radius": 28,
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
     "featured_product_QNnQGY": {
       "type": "featured-product",
       "blocks": {
@@ -217,6 +314,7 @@
   },
   "order": [
     "slideshow",
+    "packcontenue_DxQMJx",
     "featured_product_QNnQGY",
     "faq"
   ]

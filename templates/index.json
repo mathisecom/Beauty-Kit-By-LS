@@ -295,7 +295,7 @@
         "item_VkdLEt": {
           "type": "item",
           "settings": {
-            "title": "Question",
+            "title": "Est-ce un paiement unique ?",
             "content": "<p>Write content to answer to common questions your customers may have about your products, shipping policies..</p>"
           }
         }

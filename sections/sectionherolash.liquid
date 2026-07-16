@@ -78,6 +78,76 @@
   }
   {%- endif -%}
 
+
+  /* ---- Éventail de cartes ---- */
+  {%- if section.settings.show_fan -%}
+  #hero-{{ sid }} .hr-fan{
+    position:relative;z-index:1;
+    height:{{ section.settings.fan_height }}px;
+    max-width:640px;margin:0 auto 34px;
+  }
+  #hero-{{ sid }} .hr-card{
+    position:absolute;left:50%;top:50%;
+    width:{{ section.settings.card_w }}px;height:{{ section.settings.card_h }}px;
+    border-radius:18px;overflow:hidden;
+    background:#fff;
+    {%- if section.settings.show_card_shadow -%}
+    box-shadow:0 18px 50px -18px rgba(34,24,32,.25);
+    {%- endif -%}
+    transform-origin:50% 120%;
+    transition:transform .5s cubic-bezier(.22,1,.36,1);
+    display:flex;flex-direction:column;
+  }
+  #hero-{{ sid }} .hr-card[data-pos="1"]{transform:translate(-50%,-50%) rotate(-14deg) translateX(-84px);z-index:1}
+  #hero-{{ sid }} .hr-card[data-pos="2"]{transform:translate(-50%,-50%) rotate(-2deg) translateY(-8px);z-index:2}
+  #hero-{{ sid }} .hr-card[data-pos="3"]{transform:translate(-50%,-50%) rotate(10deg) translateX(88px);z-index:1}
+  #hero-{{ sid }} .hr-fan:hover .hr-card[data-pos="1"]{transform:translate(-50%,-50%) rotate(-18deg) translateX(-104px)}
+  #hero-{{ sid }} .hr-fan:hover .hr-card[data-pos="2"]{transform:translate(-50%,-50%) rotate(0deg) translateY(-20px)}
+  #hero-{{ sid }} .hr-fan:hover .hr-card[data-pos="3"]{transform:translate(-50%,-50%) rotate(14deg) translateX(108px)}
+  #hero-{{ sid }} .hr-card .c-bar{
+    flex-shrink:0;height:34px;display:flex;align-items:center;gap:6px;padding:0 12px;
+    background:rgba(255,255,255,.6);border-bottom:1px solid rgba(0,0,0,.05);
+  }
+  #hero-{{ sid }} .hr-card .c-bar .av{width:16px;height:16px;border-radius:50%;background:{{ section.settings.card_chrome_color }}}
+  #hero-{{ sid }} .hr-card .c-bar .nm{height:7px;width:70px;border-radius:4px;background:rgba(0,0,0,.08)}
+  #hero-{{ sid }} .hr-card .c-body{
+    flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:10px;padding:16px;text-align:center;position:relative;overflow:hidden;
+  }
+  #hero-{{ sid }} .hr-card .c-body img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  }
+  #hero-{{ sid }} .hr-card .c-tag{
+    font-size:{{ section.settings.size_card_tag }}px;
+    font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  }
+  #hero-{{ sid }} .hr-card .c-ttl{
+    {%- if use_fonts -%}
+    font-family:'Playfair Display',serif;
+    {%- endif -%}
+    font-style:italic;font-weight:500;
+    font-size:{{ section.settings.size_card_title }}px;
+    line-height:1.35;color:var(--hr-ink);
+  }
+  #hero-{{ sid }} .hr-card .c-foot{flex-shrink:0;display:flex;gap:8px;padding:12px 14px;background:rgba(255,255,255,.6)}
+  #hero-{{ sid }} .hr-card .c-foot i{width:14px;height:14px;border-radius:50%;background:rgba(0,0,0,.08);display:block}
+
+  /* Badges flottants */
+  #hero-{{ sid }} .hr-float{
+    position:absolute;z-index:3;
+    background:#fff;border-radius:999px;
+    padding:10px 18px;font-weight:600;
+    font-size:{{ section.settings.size_float }}px;
+    {%- if section.settings.show_card_shadow -%}
+    box-shadow:0 18px 50px -22px rgba(34,24,32,.3);
+    {%- endif -%}
+    display:flex;align-items:center;gap:8px;white-space:nowrap;
+  }
+  #hero-{{ sid }} .hr-float.f1{top:0;left:0}
+  #hero-{{ sid }} .hr-float.f2{bottom:0;right:0}
+  #hero-{{ sid }} .hr-float .dot{width:9px;height:9px;border-radius:50%;background:{{ section.settings.card_chrome_color }}}
+  {%- endif -%}
+
   /* ---- Eyebrow ---- */
   #hero-{{ sid }} .hr-eyebrow{
     display:flex;align-items:center;justify-content:center;gap:14px;
@@ -157,6 +227,15 @@
   /* ---- Responsive ---- */
   @media (max-width:640px){
     #hero-{{ sid }}{padding:calc({{ section.settings.padding_top }}px * .65) 0 calc({{ section.settings.padding_bottom }}px * .65)}
+    {%- if section.settings.show_fan -%}
+    #hero-{{ sid }} .hr-fan{height:calc({{ section.settings.fan_height }}px * .72);margin-bottom:26px}
+    #hero-{{ sid }} .hr-card{width:calc({{ section.settings.card_w }}px * .72);height:calc({{ section.settings.card_h }}px * .72)}
+    #hero-{{ sid }} .hr-card[data-pos="1"]{transform:translate(-50%,-50%) rotate(-14deg) translateX(-58px)}
+    #hero-{{ sid }} .hr-card[data-pos="3"]{transform:translate(-50%,-50%) rotate(10deg) translateX(60px)}
+    #hero-{{ sid }} .hr-card .c-tag{font-size:calc({{ section.settings.size_card_tag }}px * {{ ms }})}
+    #hero-{{ sid }} .hr-card .c-ttl{font-size:calc({{ section.settings.size_card_title }}px * {{ ms }})}
+    #hero-{{ sid }} .hr-float{font-size:calc({{ section.settings.size_float }}px * {{ ms }});padding:8px 14px}
+    {%- endif -%}
     #hero-{{ sid }} .hr-wrap{padding:0 18px}
     #hero-{{ sid }} .hr-blob{width:480px;height:400px}
     #hero-{{ sid }} .hr-eyebrow{font-size:calc({{ section.settings.size_eyebrow }}px * {{ ms }});gap:10px}
@@ -177,6 +256,38 @@
   <div class="hr-blob" aria-hidden="true"></div>
   {%- endif -%}
   <div class="hr-wrap">
+
+    {%- if section.settings.show_fan -%}
+    {%- assign cartes = section.blocks | where: "type", "carte" -%}
+    {%- if cartes.size > 0 -%}
+    <div class="hr-fan">
+      {%- if section.settings.float_left != blank -%}
+      <div class="hr-float f1"><span class="dot"></span>{{ section.settings.float_left }}</div>
+      {%- endif -%}
+      {%- for block in cartes limit: 3 -%}
+      <div class="hr-card" data-pos="{{ forloop.index }}" style="background:linear-gradient(160deg,{{ block.settings.grad_1 }},{{ block.settings.grad_2 }})" {{ block.shopify_attributes }}>
+        <div class="c-bar"><span class="av"></span><span class="nm"></span></div>
+        <div class="c-body">
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title | default: 'Aperçu de post Instagram' | escape }}" loading="lazy" width="600" height="600">
+          {%- else -%}
+            {%- if block.settings.tag != blank -%}
+            <span class="c-tag" style="color:{{ block.settings.tag_color }}">{{ block.settings.tag }}</span>
+            {%- endif -%}
+            {%- if block.settings.title != blank -%}
+            <span class="c-ttl">{{ block.settings.title }}</span>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+        <div class="c-foot"><i></i><i></i><i></i></div>
+      </div>
+      {%- endfor -%}
+      {%- if section.settings.float_right != blank -%}
+      <div class="hr-float f2">{{ section.settings.float_right }}</div>
+      {%- endif -%}
+    </div>
+    {%- endif -%}
+    {%- endif -%}
 
     {%- if section.settings.eyebrow_number != blank or section.settings.eyebrow_text != blank -%}
     <div class="hr-eyebrow">
@@ -204,9 +315,10 @@
     <p class="hr-sub">{{ section.settings.subheading }}</p>
     {%- endif -%}
 
-    {%- if section.blocks.size > 0 -%}
+    {%- assign tags = section.blocks | where: "type", "tag" -%}
+    {%- if tags.size > 0 -%}
     <div class="hr-tags">
-      {%- for block in section.blocks -%}
+      {%- for block in tags -%}
       <span {{ block.shopify_attributes }}>{{ block.settings.label }}</span>
       {%- endfor -%}
     </div>
@@ -268,6 +380,16 @@
       "default": "*39 €* au lieu de 59 € · Accès immédiat"
     },
 
+    { "type": "header", "content": "Cartes au-dessus du titre" },
+    { "type": "checkbox", "id": "show_fan", "label": "Afficher l'éventail de cartes", "default": true },
+    { "type": "checkbox", "id": "show_card_shadow", "label": "Ombre des cartes", "default": true },
+    { "type": "range", "id": "fan_height", "label": "Hauteur de la zone", "min": 260, "max": 560, "step": 10, "unit": "px", "default": 420 },
+    { "type": "range", "id": "card_w", "label": "Largeur des cartes", "min": 150, "max": 300, "step": 5, "unit": "px", "default": 220 },
+    { "type": "range", "id": "card_h", "label": "Hauteur des cartes", "min": 200, "max": 400, "step": 5, "unit": "px", "default": 290 },
+    { "type": "color", "id": "card_chrome_color", "label": "Pastille avatar / point des badges", "default": "#C94577" },
+    { "type": "text", "id": "float_left", "label": "Badge flottant gauche", "default": "150 contenus prêts à publier" },
+    { "type": "text", "id": "float_right", "label": "Badge flottant droit", "default": "🎁 2 e-books offerts" },
+
     { "type": "header", "content": "Typographie (tailles en px)" },
     { "type": "range", "id": "size_title", "label": "Titre", "min": 26, "max": 84, "step": 1, "unit": "px", "default": 58 },
     { "type": "select", "id": "weight_title", "label": "Graisse du titre", "default": "600", "options": [
@@ -281,6 +403,9 @@
     { "type": "range", "id": "size_tag", "label": "Badges", "min": 8, "max": 16, "step": 1, "unit": "px", "default": 12 },
     { "type": "range", "id": "size_btn", "label": "Texte du bouton", "min": 9, "max": 18, "step": 1, "unit": "px", "default": 12 },
     { "type": "range", "id": "size_note", "label": "Note à côté du bouton", "min": 9, "max": 18, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "size_card_tag", "label": "Sur-titre des cartes", "min": 7, "max": 14, "step": 1, "unit": "px", "default": 9 },
+    { "type": "range", "id": "size_card_title", "label": "Titre des cartes", "min": 10, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "size_float", "label": "Badges flottants", "min": 9, "max": 18, "step": 1, "unit": "px", "default": 13 },
     { "type": "range", "id": "mobile_scale", "label": "Échelle des textes sur mobile", "min": 55, "max": 100, "step": 5, "unit": "%", "default": 70 },
 
     { "type": "header", "content": "Couleurs" },
@@ -317,6 +442,19 @@
   ],
   "blocks": [
     {
+      "type": "carte",
+      "name": "Carte de l'éventail",
+      "limit": 3,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image de votre post Instagram", "info": "Recommandé : carré 600×600 px minimum. Remplace le texte ci-dessous." },
+        { "type": "color", "id": "grad_1", "label": "Dégradé — couleur 1", "default": "#FDEDE9" },
+        { "type": "color", "id": "grad_2", "label": "Dégradé — couleur 2", "default": "#F8D8D4" },
+        { "type": "text", "id": "tag", "label": "Sur-titre (si pas d'image)", "default": "Post · Avant / Après" },
+        { "type": "color", "id": "tag_color", "label": "Couleur du sur-titre", "default": "#C94577" },
+        { "type": "text", "id": "title", "label": "Titre (si pas d'image)", "default": "Le résultat qui fait réserver vos clientes" }
+      ]
+    },
+    {
       "type": "tag",
       "name": "Badge",
       "settings": [
@@ -328,6 +466,9 @@
     {
       "name": "Hero — Pack beauté",
       "blocks": [
+        { "type": "carte", "settings": { "grad_1": "#FDEDE9", "grad_2": "#F8D8D4", "tag": "Story · Promo", "tag_color": "#D9A05B", "title": "−20 % sur votre pose complète cette semaine" } },
+        { "type": "carte", "settings": { "grad_1": "#FFFFFF", "grad_2": "#FBEFF4", "tag": "Post · Avant / Après", "tag_color": "#C94577", "title": "Le résultat qui fait réserver vos clientes" } },
+        { "type": "carte", "settings": { "grad_1": "#F6E4EE", "grad_2": "#EFCFDF", "tag": "Reel · Hook", "tag_color": "#A96FB8", "title": "« 3 erreurs qui abîment vos cils… »" } },
         { "type": "tag", "settings": { "label": "Prothésistes ongulaires" } },
         { "type": "tag", "settings": { "label": "Lash techs" } },
         { "type": "tag", "settings": { "label": "Esthéticiennes" } }

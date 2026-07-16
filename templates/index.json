@@ -374,22 +374,22 @@
             "content": "<p>Les scripts de Reels ont tout changé pour moi. Les hooks fonctionnent vraiment : mes vues ont triplé et mon agenda se remplit tout seul. Mon feed fait enfin professionnel.</p>"
           }
         },
-        "testimonial_hKnMcE": {
+        "testimonial_7tdpD7": {
           "type": "testimonial",
           "settings": {
             "round_avatar": true,
             "show_rating": true,
             "rating": 5,
-            "author": "Joshua A.",
-            "title": "Testimonial 3",
-            "content": "<p>Share what your customers are saying about your products, customer service or shipping rates.</p>"
+            "author": "Sarah K.",
+            "title": "Lash Tech",
+            "content": "<p>Les scripts de Reels ont tout changé pour moi. Les hooks fonctionnent vraiment : mes vues ont triplé et mon agenda se remplit tout seul. Mon feed fait enfin professionnel.</p>"
           }
         }
       },
       "block_order": [
         "testimonial_dUM7VP",
         "testimonial_aYqBjH",
-        "testimonial_hKnMcE"
+        "testimonial_7tdpD7"
       ],
       "name": "Testimonials",
       "settings": {

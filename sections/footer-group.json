@@ -92,8 +92,8 @@
         "newsletter": {
           "type": "newsletter",
           "settings": {
-            "image": "shopify://shop_images/Lenova_7_1.png",
-            "image_width": 190,
+            "image": "shopify://shop_images/Lenova_7_2.png",
+            "image_width": 160,
             "heading_size": "h3",
             "title": "Newsletter",
             "content": ""

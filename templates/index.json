@@ -312,7 +312,7 @@
         "gap_title_cards": 36,
         "cards_max_width": 1140,
         "padding_top": 4,
-        "padding_bottom": 60,
+        "padding_bottom": 20,
         "use_custom_fonts": false
       }
     },

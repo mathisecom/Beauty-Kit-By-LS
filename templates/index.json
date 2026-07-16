@@ -53,6 +53,36 @@
     "sectionherolash_jTPPXa": {
       "type": "sectionherolash",
       "blocks": {
+        "carte_PkLb4M": {
+          "type": "carte",
+          "settings": {
+            "grad_1": "#fdede9",
+            "grad_2": "#f8d8d4",
+            "tag": "",
+            "tag_color": "#c94577",
+            "title": ""
+          }
+        },
+        "carte_VBqpPd": {
+          "type": "carte",
+          "settings": {
+            "grad_1": "#fdede9",
+            "grad_2": "#f8d8d4",
+            "tag": "",
+            "tag_color": "#c94577",
+            "title": ""
+          }
+        },
+        "carte_bz9Arj": {
+          "type": "carte",
+          "settings": {
+            "grad_1": "#fdede9",
+            "grad_2": "#f8d8d4",
+            "tag": "",
+            "tag_color": "#c94577",
+            "title": ""
+          }
+        },
         "tag_KjAaBr": {
           "type": "tag",
           "settings": {
@@ -73,6 +103,9 @@
         }
       },
       "block_order": [
+        "carte_PkLb4M",
+        "carte_VBqpPd",
+        "carte_bz9Arj",
         "tag_KjAaBr",
         "tag_NyLGRX",
         "tag_Wc7Yyc"
@@ -86,32 +119,43 @@
         "button_label": "Je profite de l'offre",
         "button_link": "#shopify-section-template--22122118742270__featured_product_QNnQGY",
         "note": "*39 €* au lieu de 59 € · Accès immédiat",
-        "size_title": 45,
+        "show_fan": true,
+        "show_card_shadow": false,
+        "fan_height": 380,
+        "card_w": 175,
+        "card_h": 315,
+        "card_chrome_color": "#c94577",
+        "float_left": "150 contenus prêts à publier",
+        "float_right": "🎁 2 e-books offerts",
+        "size_title": 47,
         "weight_title": "600",
         "size_eyebrow": 11,
         "size_sub": 16,
         "size_tag": 11,
         "size_btn": 14,
         "size_note": 15,
+        "size_card_tag": 9,
+        "size_card_title": 16,
+        "size_float": 14,
         "mobile_scale": 60,
-        "page_bg": "#F3EEEF",
+        "page_bg": "#f3eeef",
         "text_color": "#221820",
         "italic_color": "#221820",
-        "muted_color": "#6F6068",
-        "tag_bg": "#FFFFFF",
-        "tag_border": "#E7DDE1",
-        "tag_text": "#6F6068",
-        "btn_bg": "#C94577",
+        "muted_color": "#6f6068",
+        "tag_bg": "#ffffff",
+        "tag_border": "#e7dde1",
+        "tag_text": "#6f6068",
+        "btn_bg": "#c94577",
         "btn_hover_bg": "#221820",
-        "btn_text_color": "#FFFFFF",
-        "chip_color_1": "#C94577",
-        "chip_color_2": "#E88BAF",
-        "chip_color_3": "#D9A05B",
+        "btn_text_color": "#ffffff",
+        "chip_color_1": "#c94577",
+        "chip_color_2": "#e88baf",
+        "chip_color_3": "#d9a05b",
         "show_blob": true,
         "blob_animate": true,
-        "blob_color_1": "#F9C6D9",
-        "blob_color_2": "#F3D9B8",
-        "blob_color_3": "#E3C4F0",
+        "blob_color_1": "#f9c6d9",
+        "blob_color_2": "#f3d9b8",
+        "blob_color_3": "#e3c4f0",
         "blob_opacity": 75,
         "padding_top": 52,
         "padding_bottom": 52,

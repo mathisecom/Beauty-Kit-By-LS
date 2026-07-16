@@ -657,10 +657,6 @@
             "size_chart_page": ""
           }
         },
-        "quantity_selector_bhpta4": {
-          "type": "quantity_selector",
-          "settings": {}
-        },
         "buy_buttons_cQkj6r": {
           "type": "buy_buttons",
           "settings": {
@@ -706,7 +702,6 @@
         "price_xrVNC6",
         "description_taqJFc",
         "variant_picker_VEVgMn",
-        "quantity_selector_bhpta4",
         "buy_buttons_cQkj6r",
         "liquid_iTwx8N",
         "collapsible_text_cNc8fb",

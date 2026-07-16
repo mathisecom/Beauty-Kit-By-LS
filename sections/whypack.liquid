@@ -1,0 +1,301 @@
+{% comment %}
+  ============================================================
+  SECTION : Pourquoi ce pack (grille d'avantages à icônes)
+  ------------------------------------------------------------
+  Installation :
+  1. Shopify admin → Boutique en ligne → Thèmes → ⋯ → Modifier le code
+  2. Dossier "Sections" → "Ajouter une nouvelle section"
+  3. Nommer : pourquoi-pack → coller tout ce fichier → Enregistrer
+  4. Éditeur de thème → "Ajouter une section" → "Pourquoi ce pack"
+  ------------------------------------------------------------
+  - Entourez un mot de *astérisques* dans le titre → italique.
+  - Chaque avantage est un bloc : icône au choix (ou votre
+    propre image), titre, texte.
+  - Sur mobile, choisissez 1 ou 2 avantages par ligne.
+  ============================================================
+{% endcomment %}
+
+{%- liquid
+  assign sid = section.id
+  assign use_fonts = section.settings.use_custom_fonts
+  assign ms = section.settings.mobile_scale | divided_by: 100.0
+-%}
+
+{%- if use_fonts -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+{%- endif -%}
+
+<style>
+  #why-{{ sid }}{
+    --wh-page: {{ section.settings.page_bg }};
+    --wh-panel: {{ section.settings.panel_bg }};
+    --wh-ink: {{ section.settings.text_color }};
+    --wh-muted: {{ section.settings.muted_color }};
+    --wh-italic: {{ section.settings.italic_color }};
+    --wh-icon: {{ section.settings.icon_color }};
+    background:var(--wh-page);
+    padding:{{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    {%- if use_fonts -%}
+    font-family:'Host Grotesk',sans-serif;
+    {%- endif -%}
+    color:var(--wh-ink);
+    line-height:1.7;
+  }
+  #why-{{ sid }} *{margin:0;padding:0;box-sizing:border-box}
+  #why-{{ sid }} .wh-wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+  #why-{{ sid }} .wh-panel{
+    {%- if section.settings.show_panel -%}
+    background:var(--wh-panel);
+    border-radius:{{ section.settings.panel_radius }}px;
+    padding:70px 60px;
+    {%- if section.settings.show_shadow -%}
+    box-shadow:0 1px 0 rgba(34,24,32,.03), 0 30px 70px -40px rgba(34,24,32,.14);
+    {%- endif -%}
+    {%- endif -%}
+    display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:start;
+  }
+
+  /* ---- Colonne gauche ---- */
+  #why-{{ sid }} .wh-eyebrow{
+    display:flex;align-items:center;gap:14px;
+    font-size:{{ section.settings.size_eyebrow }}px;
+    font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--wh-muted);margin-bottom:22px;
+  }
+  #why-{{ sid }} .wh-eyebrow::after{content:"";height:1px;width:36px;background:var(--wh-muted);opacity:.4;order:2}
+  #why-{{ sid }} .wh-eyebrow .n{order:1;color:var(--wh-ink)}
+  #why-{{ sid }} .wh-eyebrow .t{order:3}
+  #why-{{ sid }} .wh-title{
+    font-weight:{{ section.settings.weight_title }};
+    font-size:{{ section.settings.size_title }}px;
+    line-height:1.26;letter-spacing:-.02em;
+  }
+  #why-{{ sid }} .wh-title em{
+    {%- if use_fonts -%}
+    font-family:'Playfair Display',serif;
+    {%- endif -%}
+    font-style:italic;font-weight:500;letter-spacing:0;
+    color:var(--wh-italic);
+  }
+  #why-{{ sid }} .wh-desc{
+    color:var(--wh-muted);margin-top:18px;max-width:24em;
+    font-size:{{ section.settings.size_desc }}px;
+  }
+
+  /* ---- Grille d'avantages ---- */
+  #why-{{ sid }} .wh-grid{
+    display:grid;
+    grid-template-columns:repeat({{ section.settings.columns_desktop }},1fr);
+    gap:{{ section.settings.grid_gap_v }}px {{ section.settings.grid_gap_h }}px;
+  }
+  #why-{{ sid }} .wh-cell svg,
+  #why-{{ sid }} .wh-cell .wh-img{
+    width:{{ section.settings.icon_size }}px;height:{{ section.settings.icon_size }}px;
+    margin-bottom:16px;display:block;
+  }
+  #why-{{ sid }} .wh-cell svg{stroke:var(--wh-icon);stroke-width:1.3;fill:none}
+  #why-{{ sid }} .wh-cell .wh-img{object-fit:contain}
+  #why-{{ sid }} .wh-cell h3{
+    font-weight:500;margin-bottom:8px;
+    font-size:{{ section.settings.size_cell_title }}px;
+  }
+  #why-{{ sid }} .wh-cell p{
+    color:var(--wh-muted);
+    font-size:{{ section.settings.size_cell_text }}px;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width:990px){
+    #why-{{ sid }} .wh-panel{grid-template-columns:1fr;gap:44px;{% if section.settings.show_panel %}padding:52px 36px{% endif %}}
+  }
+  @media (max-width:640px){
+    #why-{{ sid }} .wh-wrap{padding:0 16px}
+    #why-{{ sid }} .wh-panel{ {% if section.settings.show_panel %}padding:40px 22px;border-radius:calc({{ section.settings.panel_radius }}px * .75);{% endif %} gap:36px}
+    #why-{{ sid }} .wh-grid{
+      grid-template-columns:repeat({{ section.settings.columns_mobile }},1fr);
+      gap:calc({{ section.settings.grid_gap_v }}px * .75) calc({{ section.settings.grid_gap_h }}px * .5);
+    }
+    #why-{{ sid }} .wh-eyebrow{font-size:calc({{ section.settings.size_eyebrow }}px * {{ ms }})}
+    #why-{{ sid }} .wh-title{font-size:calc({{ section.settings.size_title }}px * {{ ms }})}
+    #why-{{ sid }} .wh-desc{font-size:calc({{ section.settings.size_desc }}px * {{ ms }})}
+    #why-{{ sid }} .wh-cell h3{font-size:calc({{ section.settings.size_cell_title }}px * {{ ms }})}
+    #why-{{ sid }} .wh-cell p{font-size:calc({{ section.settings.size_cell_text }}px * {{ ms }})}
+    #why-{{ sid }} .wh-cell svg,
+    #why-{{ sid }} .wh-cell .wh-img{width:calc({{ section.settings.icon_size }}px * .85);height:calc({{ section.settings.icon_size }}px * .85);margin-bottom:12px}
+  }
+</style>
+
+<div id="why-{{ sid }}">
+  <div class="wh-wrap">
+    <div class="wh-panel">
+
+      <div class="wh-left">
+        {%- if section.settings.eyebrow_number != blank or section.settings.eyebrow_text != blank -%}
+        <div class="wh-eyebrow">
+          <span class="n">{{ section.settings.eyebrow_number }}</span>
+          <span class="t">{{ section.settings.eyebrow_text }}</span>
+        </div>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+        <h2 class="wh-title">
+          {%- assign parts = section.settings.heading | split: '*' -%}
+          {%- for part in parts -%}
+            {%- assign idx = forloop.index0 | modulo: 2 -%}
+            {%- if idx == 1 -%}<em>{{ part }}</em>{%- else -%}{{ part }}{%- endif -%}
+          {%- endfor -%}
+        </h2>
+        {%- endif -%}
+
+        {%- if section.settings.description != blank -%}
+        <p class="wh-desc">{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="wh-grid">
+        {%- for block in section.blocks -%}
+        <div class="wh-cell" {{ block.shopify_attributes }}>
+          {%- if block.settings.custom_icon != blank -%}
+            <img class="wh-img" src="{{ block.settings.custom_icon | image_url: width: 120 }}" alt="" loading="lazy" width="60" height="60">
+          {%- else -%}
+            {%- case block.settings.icon -%}
+              {%- when 'clock' -%}
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg>
+              {%- when 'calendar' -%}
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 9h18M8 2v4M16 2v4M8 14h3M8 17h6"/></svg>
+              {%- when 'star' -%}
+                <svg viewBox="0 0 24 24"><path d="M12 3l2.4 4.8L20 9l-4 3.9.9 5.6L12 15.8 7.1 18.5 8 12.9 4 9l5.6-1.2z"/></svg>
+              {%- when 'arrow' -%}
+                <svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 11-8-8"/><path d="M20 4l-8 8"/><path d="M15 4h5v5"/></svg>
+              {%- when 'person' -%}
+                <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21c1.5-4 4.5-5.5 7-5.5s5.5 1.5 7 5.5"/><path d="M17 8h5M19.5 5.5v5"/></svg>
+              {%- when 'chart' -%}
+                <svg viewBox="0 0 24 24"><path d="M4 19l4-9 4 5 3-7 5 11z"/><path d="M2 21h20"/></svg>
+              {%- when 'heart' -%}
+                <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-9-9a5 5 0 019-3 5 5 0 019 3c-2 4.5-9 9-9 9z"/></svg>
+              {%- when 'spark' -%}
+                <svg viewBox="0 0 24 24"><path d="M12 2v6M12 16v6M2 12h6M16 12h6M5 5l4 4M15 15l4 4M19 5l-4 4M9 15l-4 4"/></svg>
+            {%- endcase -%}
+          {%- endif -%}
+          {%- if block.settings.title != blank -%}<h3>{{ block.settings.title }}</h3>{%- endif -%}
+          {%- if block.settings.text != blank -%}<p>{{ block.settings.text }}</p>{%- endif -%}
+        </div>
+        {%- endfor -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Pourquoi ce pack",
+  "tag": "section",
+  "class": "section-pourquoi-pack",
+  "settings": [
+    { "type": "header", "content": "Textes" },
+    { "type": "text", "id": "eyebrow_number", "label": "Numéro (ex : 03)", "default": "03" },
+    { "type": "text", "id": "eyebrow_text", "label": "Sur-titre", "default": "Pourquoi ce pack" },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Titre",
+      "info": "Entourez un mot de *astérisques* pour l'italique élégant",
+      "default": "Moins de temps devant l'écran, *plus de clientes* en institut."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Des solutions pensées pour les professionnelles de la beauté qui veulent développer leur visibilité sans y passer leurs soirées."
+    },
+
+    { "type": "header", "content": "Grille" },
+    { "type": "select", "id": "columns_desktop", "label": "Avantages par ligne sur PC", "default": "2", "options": [
+      { "value": "2", "label": "2 par ligne" },
+      { "value": "3", "label": "3 par ligne" }
+    ] },
+    { "type": "select", "id": "columns_mobile", "label": "Avantages par ligne sur mobile", "default": "2", "options": [
+      { "value": "1", "label": "1 par ligne" },
+      { "value": "2", "label": "2 par ligne" }
+    ] },
+    { "type": "range", "id": "grid_gap_v", "label": "Espace vertical", "min": 20, "max": 72, "step": 4, "unit": "px", "default": 44 },
+    { "type": "range", "id": "grid_gap_h", "label": "Espace horizontal", "min": 20, "max": 72, "step": 2, "unit": "px", "default": 50 },
+    { "type": "range", "id": "icon_size", "label": "Taille des icônes", "min": 24, "max": 60, "step": 2, "unit": "px", "default": 38 },
+
+    { "type": "header", "content": "Typographie (tailles en px)" },
+    { "type": "range", "id": "size_title", "label": "Titre", "min": 18, "max": 56, "step": 1, "unit": "px", "default": 33 },
+    { "type": "select", "id": "weight_title", "label": "Graisse du titre", "default": "600", "options": [
+      { "value": "400", "label": "Normale (400)" },
+      { "value": "500", "label": "Moyenne (500)" },
+      { "value": "600", "label": "Semi-gras (600)" },
+      { "value": "700", "label": "Gras (700)" }
+    ] },
+    { "type": "range", "id": "size_eyebrow", "label": "Sur-titre", "min": 8, "max": 18, "step": 1, "unit": "px", "default": 11 },
+    { "type": "range", "id": "size_desc", "label": "Description", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "size_cell_title", "label": "Titres des avantages", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "size_cell_text", "label": "Textes des avantages", "min": 11, "max": 20, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "mobile_scale", "label": "Échelle des textes sur mobile", "min": 70, "max": 100, "step": 5, "unit": "%", "default": 90 },
+
+    { "type": "header", "content": "Couleurs" },
+    { "type": "color", "id": "page_bg", "label": "Fond de la page", "default": "#F3EEEF" },
+    { "type": "color", "id": "panel_bg", "label": "Fond du panneau", "default": "#FFFFFF" },
+    { "type": "color", "id": "text_color", "label": "Texte principal", "default": "#221820" },
+    { "type": "color", "id": "italic_color", "label": "Mots en italique", "default": "#221820" },
+    { "type": "color", "id": "muted_color", "label": "Texte secondaire", "default": "#6F6068" },
+    { "type": "color", "id": "icon_color", "label": "Icônes", "default": "#221820" },
+
+    { "type": "header", "content": "Mise en forme" },
+    { "type": "checkbox", "id": "show_panel", "label": "Afficher le panneau blanc", "default": true },
+    { "type": "checkbox", "id": "show_shadow", "label": "Afficher l'ombre du panneau", "default": false },
+    { "type": "range", "id": "panel_radius", "label": "Arrondi du panneau", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 28 },
+    { "type": "range", "id": "padding_top", "label": "Espace au-dessus", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "label": "Espace en dessous", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 60 },
+
+    { "type": "header", "content": "Polices" },
+    { "type": "checkbox", "id": "use_custom_fonts", "label": "Charger Host Grotesk + Playfair Display", "info": "Décochez pour utiliser la police de votre thème", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "avantage",
+      "name": "Avantage",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icône",
+          "default": "clock",
+          "options": [
+            { "value": "clock", "label": "Horloge" },
+            { "value": "calendar", "label": "Calendrier" },
+            { "value": "star", "label": "Étoile" },
+            { "value": "arrow", "label": "Flèche croissance" },
+            { "value": "person", "label": "Nouvelle cliente" },
+            { "value": "chart", "label": "Courbe" },
+            { "value": "heart", "label": "Cœur" },
+            { "value": "spark", "label": "Éclat" }
+          ]
+        },
+        { "type": "image_picker", "id": "custom_icon", "label": "Icône personnalisée (optionnel)", "info": "Remplace l'icône ci-dessus" },
+        { "type": "text", "id": "title", "label": "Titre", "default": "Gagnez du temps" },
+        { "type": "textarea", "id": "text", "label": "Texte", "default": "Plus besoin de créer chaque visuel de zéro : personnalisez et publiez en quelques minutes." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pourquoi ce pack",
+      "blocks": [
+        { "type": "avantage", "settings": { "icon": "clock", "title": "Gagnez du temps", "text": "Plus besoin de créer chaque visuel de zéro : personnalisez et publiez en quelques minutes." } },
+        { "type": "avantage", "settings": { "icon": "calendar", "title": "Publiez régulièrement", "text": "Assez de contenu pour plusieurs mois, sans jamais manquer d'idées ni casser votre rythme." } },
+        { "type": "avantage", "settings": { "icon": "star", "title": "Valorisez vos prestations", "text": "Des visuels qui mettent en avant votre savoir-faire, vos résultats et votre univers." } },
+        { "type": "avantage", "settings": { "icon": "arrow", "title": "Des offres qui donnent envie", "text": "Des promos structurées pour déclencher des réservations, pas seulement des likes." } },
+        { "type": "avantage", "settings": { "icon": "person", "title": "Attirez de nouvelles clientes", "text": "Les bons hooks au bon endroit pour capter l'attention et élargir votre clientèle." } },
+        { "type": "avantage", "settings": { "icon": "chart", "title": "Image plus professionnelle", "text": "Un feed cohérent et soigné qui inspire confiance avant même le premier échange." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

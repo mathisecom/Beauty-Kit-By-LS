@@ -56,6 +56,7 @@
         "carte_PkLb4M": {
           "type": "carte",
           "settings": {
+            "image": "shopify://shop_images/il_794xN.7637622056_lehn.webp",
             "grad_1": "#fdede9",
             "grad_2": "#f8d8d4",
             "tag": "",
@@ -66,6 +67,7 @@
         "carte_VBqpPd": {
           "type": "carte",
           "settings": {
+            "image": "shopify://shop_images/il_794xN.7913980682_r2xk.webp",
             "grad_1": "#fdede9",
             "grad_2": "#f8d8d4",
             "tag": "",
@@ -76,6 +78,7 @@
         "carte_bz9Arj": {
           "type": "carte",
           "settings": {
+            "image": "shopify://shop_images/il_794xN.6947338394_gq55.webp",
             "grad_1": "#fdede9",
             "grad_2": "#f8d8d4",
             "tag": "",

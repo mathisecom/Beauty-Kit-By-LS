@@ -512,11 +512,11 @@
         "size_cell_title": 17,
         "size_cell_text": 13,
         "mobile_scale": 85,
-        "page_bg": "#FFFFFF",
-        "panel_bg": "#FFFFFF",
+        "page_bg": "#ffffff",
+        "panel_bg": "#ffffff",
         "text_color": "#221820",
         "italic_color": "#221820",
-        "muted_color": "#6F6068",
+        "muted_color": "#6f6068",
         "icon_color": "#221820",
         "show_panel": true,
         "show_shadow": false,
@@ -617,6 +617,67 @@
         "heading_gradient": "",
         "testimonial_card_background": "",
         "testimonial_card_text_color": ""
+      }
+    },
+    "ebookoffert_pUn6cU": {
+      "type": "ebookoffert",
+      "blocks": {
+        "bonus_8wUd7H": {
+          "type": "bonus",
+          "settings": {
+            "tag": "🎁 Bonus 1 — E-book",
+            "title": "50 phrases pour vendre vos prestations *sans forcer.*",
+            "text": "Le bon mot au bon moment : des formulations testées pour transformer vos abonnées en clientes, en douceur et sans jamais paraître insistante.",
+            "mention": "Offert avec le pack"
+          }
+        },
+        "bonus_qdM3dY": {
+          "type": "bonus",
+          "settings": {
+            "tag": "🎁 Bonus 2 — E-book",
+            "title": "30 scripts de Reels *prêts à tourner.*",
+            "text": "Ouvrez, lisez, filmez. Chaque script inclut le hook, le déroulé et l'appel à l'action pour maximiser votre portée et attirer de nouvelles clientes.",
+            "mention": "Offert avec le pack"
+          }
+        }
+      },
+      "block_order": [
+        "bonus_8wUd7H",
+        "bonus_qdM3dY"
+      ],
+      "name": "Bonus offerts",
+      "settings": {
+        "eyebrow_number": "",
+        "eyebrow_text": "",
+        "heading": "Deux e-books inclus, *sans supplément.*",
+        "columns_desktop": "2",
+        "grid_gap": 26,
+        "gap_title_cards": 48,
+        "size_title": 33,
+        "weight_title": "600",
+        "size_eyebrow": 11,
+        "size_tag": 10,
+        "size_card_title": 22,
+        "size_card_text": 14,
+        "size_val": 12,
+        "mobile_scale": 90,
+        "page_bg": "#FFFFFF",
+        "text_color": "#221820",
+        "italic_head_color": "#221820",
+        "muted_head_color": "#6F6068",
+        "card_bg": "#241A1F",
+        "card_text_color": "#FFFFFF",
+        "card_muted_color": "#B8A6AF",
+        "card_italic_color": "#F3B8CE",
+        "tag_color": "#F3B8CE",
+        "show_glow": true,
+        "glow_color": "#C94577",
+        "glow_opacity": 35,
+        "show_shadow": false,
+        "card_radius": 18,
+        "padding_top": 20,
+        "padding_bottom": 40,
+        "use_custom_fonts": false
       }
     },
     "featured_product_QNnQGY": {
@@ -840,6 +901,7 @@
     "whypack_YcALWD",
     "rich_text_8PiMrP",
     "testimonials_rxHCFe",
+    "ebookoffert_pUn6cU",
     "featured_product_QNnQGY",
     "faq",
     "ctafinal_LngjTF"

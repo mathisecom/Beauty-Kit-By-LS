@@ -746,18 +746,8 @@
           "settings": {
             "icon": "none",
             "icon_width": 20,
-            "title": "Title",
-            "content": "<p>Share some content to your customers about your products.</p>",
-            "page": ""
-          }
-        },
-        "collapsible_text_9QwLjj": {
-          "type": "collapsible_text",
-          "settings": {
-            "icon": "none",
-            "icon_width": 20,
-            "title": "Title",
-            "content": "<p>Share some content to your customers about your products.</p>",
+            "title": "Comment ça fonctionne ?",
+            "content": "<p><strong>1. Commandez votre pack</strong><br/><br/>Ajoutez le pack à votre panier et finalisez votre commande en quelques clics.</p><p><strong>2. Recevez votre accès immédiatement</strong><br/><br/>Après votre achat, vous recevez un lien vous permettant d’accéder à l’ensemble des templates, scripts et phrases de vente inclus dans le pack.</p><p><strong>3. Personnalisez vos contenus sur Canva</strong><br/><br/>Modifiez facilement les textes, les couleurs, les photos, les tarifs et les informations de votre entreprise, même sans compétence en graphisme.</p><p><strong>4. Téléchargez et publiez</strong><br/><br/>Enregistrez vos créations au format image ou vidéo, puis publiez-les directement sur Instagram et Facebook.</p><p><strong>Tout est prêt à l’emploi :</strong> il ne vous reste plus qu’à adapter les contenus à votre activité et à commencer à attirer davantage de clientes</p>",
             "page": ""
           }
         }
@@ -771,8 +761,7 @@
         "variant_picker_VEVgMn",
         "buy_buttons_cQkj6r",
         "liquid_iTwx8N",
-        "collapsible_text_cNc8fb",
-        "collapsible_text_9QwLjj"
+        "collapsible_text_cNc8fb"
       ],
       "name": "Featured product",
       "settings": {

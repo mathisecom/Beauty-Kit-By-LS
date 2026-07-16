@@ -1,0 +1,300 @@
+{% comment %}
+  ============================================================
+  SECTION : Bonus offerts (cartes sombres)
+  ------------------------------------------------------------
+  Installation :
+  1. Shopify admin → Boutique en ligne → Thèmes → ⋯ → Modifier le code
+  2. Dossier "Sections" → "Ajouter une nouvelle section"
+  3. Nommer : bonus-offerts → coller tout ce fichier → Enregistrer
+  4. Éditeur de thème → "Ajouter une section" → "Bonus offerts"
+  ------------------------------------------------------------
+  - Entourez un mot de *astérisques* dans le titre de la section
+    ou des cartes → italique élégant rose.
+  - Chaque carte bonus est un bloc : badge, titre, texte, mention.
+  ============================================================
+{% endcomment %}
+
+{%- liquid
+  assign sid = section.id
+  assign use_fonts = section.settings.use_custom_fonts
+  assign ms = section.settings.mobile_scale | divided_by: 100.0
+-%}
+
+{%- if use_fonts -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+{%- endif -%}
+
+<style>
+  #bonus-{{ sid }}{
+    --bn-page: {{ section.settings.page_bg }};
+    --bn-ink: {{ section.settings.text_color }};
+    --bn-muted-head: {{ section.settings.muted_head_color }};
+    --bn-italic-head: {{ section.settings.italic_head_color }};
+    --bn-card: {{ section.settings.card_bg }};
+    --bn-card-txt: {{ section.settings.card_text_color }};
+    --bn-card-muted: {{ section.settings.card_muted_color }};
+    --bn-italic: {{ section.settings.card_italic_color }};
+    --bn-tag: {{ section.settings.tag_color }};
+    --bn-glow: {{ section.settings.glow_color }};
+    background:var(--bn-page);
+    padding:{{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    {%- if use_fonts -%}
+    font-family:'Host Grotesk',sans-serif;
+    {%- endif -%}
+    color:var(--bn-ink);
+    line-height:1.7;
+  }
+  #bonus-{{ sid }} *{margin:0;padding:0;box-sizing:border-box}
+  #bonus-{{ sid }} .bn-wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+
+  /* ---- En-tête ---- */
+  #bonus-{{ sid }} .bn-eyebrow{
+    display:flex;align-items:center;gap:14px;
+    font-size:{{ section.settings.size_eyebrow }}px;
+    font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--bn-muted-head);margin-bottom:22px;
+  }
+  #bonus-{{ sid }} .bn-eyebrow::after{content:"";height:1px;width:36px;background:var(--bn-muted-head);opacity:.4;order:2}
+  #bonus-{{ sid }} .bn-eyebrow .n{order:1;color:var(--bn-ink)}
+  #bonus-{{ sid }} .bn-eyebrow .t{order:3}
+  #bonus-{{ sid }} .bn-title{
+    font-weight:{{ section.settings.weight_title }};
+    font-size:{{ section.settings.size_title }}px;
+    line-height:1.26;letter-spacing:-.02em;max-width:20em;
+  }
+  #bonus-{{ sid }} .bn-title em,
+  #bonus-{{ sid }} .bn-card h3 em{
+    {%- if use_fonts -%}
+    font-family:'Playfair Display',serif;
+    {%- endif -%}
+    font-style:italic;font-weight:500;letter-spacing:0;
+  }
+  #bonus-{{ sid }} .bn-title em{color:var(--bn-italic-head)}
+
+  /* ---- Grille de cartes ---- */
+  #bonus-{{ sid }} .bn-grid{
+    display:grid;
+    grid-template-columns:repeat({{ section.settings.columns_desktop }},1fr);
+    gap:{{ section.settings.grid_gap }}px;
+    margin-top:{{ section.settings.gap_title_cards }}px;
+  }
+  #bonus-{{ sid }} .bn-card{
+    border-radius:{{ section.settings.card_radius }}px;
+    padding:44px 40px;position:relative;overflow:hidden;
+    background:var(--bn-card);color:var(--bn-card-txt);
+    {%- if section.settings.show_shadow -%}
+    box-shadow:0 30px 70px -40px rgba(34,24,32,.35);
+    {%- endif -%}
+  }
+  {%- if section.settings.show_glow -%}
+  #bonus-{{ sid }} .bn-card::before{
+    content:"";position:absolute;top:-50px;right:-50px;width:190px;height:190px;border-radius:50%;
+    background:radial-gradient(circle,var(--bn-glow),transparent 70%);
+    opacity:{{ section.settings.glow_opacity | divided_by: 100.0 }};
+  }
+  {%- endif -%}
+  #bonus-{{ sid }} .bn-tag{
+    position:relative;display:inline-block;
+    font-size:{{ section.settings.size_tag }}px;
+    font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--bn-tag);border:1px solid color-mix(in srgb, var(--bn-tag) 35%, transparent);
+    border-radius:999px;padding:6px 16px;margin-bottom:22px;
+  }
+  #bonus-{{ sid }} .bn-card h3{
+    position:relative;font-weight:500;
+    font-size:{{ section.settings.size_card_title }}px;
+    line-height:1.35;margin-bottom:14px;max-width:16em;
+  }
+  #bonus-{{ sid }} .bn-card h3 em{color:var(--bn-italic)}
+  #bonus-{{ sid }} .bn-card p{
+    position:relative;color:var(--bn-card-muted);
+    font-size:{{ section.settings.size_card_text }}px;
+    max-width:28em;
+  }
+  #bonus-{{ sid }} .bn-val{
+    position:relative;display:block;margin-top:24px;
+    font-size:{{ section.settings.size_val }}px;
+    letter-spacing:.14em;text-transform:uppercase;font-weight:500;
+    color:var(--bn-card-txt);
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width:990px){
+    #bonus-{{ sid }} .bn-grid{grid-template-columns:1fr}
+  }
+  @media (max-width:640px){
+    #bonus-{{ sid }} .bn-wrap{padding:0 16px}
+    #bonus-{{ sid }} .bn-card{padding:32px 24px;border-radius:calc({{ section.settings.card_radius }}px * .85)}
+    #bonus-{{ sid }} .bn-grid{gap:calc({{ section.settings.grid_gap }}px * .7);margin-top:calc({{ section.settings.gap_title_cards }}px * .7)}
+    #bonus-{{ sid }} .bn-eyebrow{font-size:calc({{ section.settings.size_eyebrow }}px * {{ ms }})}
+    #bonus-{{ sid }} .bn-title{font-size:calc({{ section.settings.size_title }}px * {{ ms }})}
+    #bonus-{{ sid }} .bn-tag{font-size:calc({{ section.settings.size_tag }}px * {{ ms }})}
+    #bonus-{{ sid }} .bn-card h3{font-size:calc({{ section.settings.size_card_title }}px * {{ ms }})}
+    #bonus-{{ sid }} .bn-card p{font-size:calc({{ section.settings.size_card_text }}px * {{ ms }})}
+    #bonus-{{ sid }} .bn-val{font-size:calc({{ section.settings.size_val }}px * {{ ms }})}
+  }
+</style>
+
+<div id="bonus-{{ sid }}">
+  <div class="bn-wrap">
+
+    {%- if section.settings.eyebrow_number != blank or section.settings.eyebrow_text != blank -%}
+    <div class="bn-eyebrow">
+      <span class="n">{{ section.settings.eyebrow_number }}</span>
+      <span class="t">{{ section.settings.eyebrow_text }}</span>
+    </div>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+    <h2 class="bn-title">
+      {%- assign parts = section.settings.heading | split: '*' -%}
+      {%- for part in parts -%}
+        {%- assign idx = forloop.index0 | modulo: 2 -%}
+        {%- if idx == 1 -%}<em>{{ part }}</em>{%- else -%}{{ part }}{%- endif -%}
+      {%- endfor -%}
+    </h2>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+    <div class="bn-grid">
+      {%- for block in section.blocks -%}
+      <div class="bn-card" {{ block.shopify_attributes }}>
+        {%- if block.settings.tag != blank -%}
+        <span class="bn-tag">{{ block.settings.tag }}</span>
+        {%- endif -%}
+        {%- if block.settings.title != blank -%}
+        <h3>
+          {%- assign tparts = block.settings.title | split: '*' -%}
+          {%- for part in tparts -%}
+            {%- assign tidx = forloop.index0 | modulo: 2 -%}
+            {%- if tidx == 1 -%}<em>{{ part }}</em>{%- else -%}{{ part }}{%- endif -%}
+          {%- endfor -%}
+        </h3>
+        {%- endif -%}
+        {%- if block.settings.text != blank -%}
+        <p>{{ block.settings.text }}</p>
+        {%- endif -%}
+        {%- if block.settings.mention != blank -%}
+        <span class="bn-val">{{ block.settings.mention }}</span>
+        {%- endif -%}
+      </div>
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Bonus offerts",
+  "tag": "section",
+  "class": "section-bonus-offerts",
+  "settings": [
+    { "type": "header", "content": "En-tête" },
+    { "type": "text", "id": "eyebrow_number", "label": "Numéro (ex : 05)", "default": "05" },
+    { "type": "text", "id": "eyebrow_text", "label": "Sur-titre", "default": "Vos bonus offerts" },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Titre",
+      "info": "Entourez un mot de *astérisques* pour l'italique élégant",
+      "default": "Deux e-books inclus, *sans supplément.*"
+    },
+
+    { "type": "header", "content": "Grille" },
+    { "type": "select", "id": "columns_desktop", "label": "Cartes par ligne sur PC", "default": "2", "options": [
+      { "value": "1", "label": "1 par ligne" },
+      { "value": "2", "label": "2 par ligne" },
+      { "value": "3", "label": "3 par ligne" }
+    ] },
+    { "type": "range", "id": "grid_gap", "label": "Espace entre les cartes", "min": 12, "max": 48, "step": 2, "unit": "px", "default": 26 },
+    { "type": "range", "id": "gap_title_cards", "label": "Espace titre / cartes", "min": 20, "max": 80, "step": 4, "unit": "px", "default": 48 },
+
+    { "type": "header", "content": "Typographie (tailles en px)" },
+    { "type": "range", "id": "size_title", "label": "Titre de la section", "min": 18, "max": 56, "step": 1, "unit": "px", "default": 33 },
+    { "type": "select", "id": "weight_title", "label": "Graisse du titre", "default": "600", "options": [
+      { "value": "400", "label": "Normale (400)" },
+      { "value": "500", "label": "Moyenne (500)" },
+      { "value": "600", "label": "Semi-gras (600)" },
+      { "value": "700", "label": "Gras (700)" }
+    ] },
+    { "type": "range", "id": "size_eyebrow", "label": "Sur-titre", "min": 8, "max": 18, "step": 1, "unit": "px", "default": 11 },
+    { "type": "range", "id": "size_tag", "label": "Badges des cartes", "min": 8, "max": 16, "step": 1, "unit": "px", "default": 10 },
+    { "type": "range", "id": "size_card_title", "label": "Titres des cartes", "min": 14, "max": 34, "step": 1, "unit": "px", "default": 22 },
+    { "type": "range", "id": "size_card_text", "label": "Textes des cartes", "min": 11, "max": 20, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "size_val", "label": "Mention (Offert avec le pack)", "min": 8, "max": 16, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "mobile_scale", "label": "Échelle des textes sur mobile", "min": 70, "max": 100, "step": 5, "unit": "%", "default": 90 },
+
+    { "type": "header", "content": "Couleurs" },
+    { "type": "color", "id": "page_bg", "label": "Fond de la section", "default": "#F3EEEF" },
+    { "type": "color", "id": "text_color", "label": "Titre de la section", "default": "#221820" },
+    { "type": "color", "id": "italic_head_color", "label": "Italique du titre", "default": "#221820" },
+    { "type": "color", "id": "muted_head_color", "label": "Sur-titre", "default": "#6F6068" },
+    { "type": "color", "id": "card_bg", "label": "Fond des cartes", "default": "#241A1F" },
+    { "type": "color", "id": "card_text_color", "label": "Texte des cartes", "default": "#FFFFFF" },
+    { "type": "color", "id": "card_muted_color", "label": "Texte secondaire des cartes", "default": "#B8A6AF" },
+    { "type": "color", "id": "card_italic_color", "label": "Italique des cartes", "default": "#F3B8CE" },
+    { "type": "color", "id": "tag_color", "label": "Badges des cartes", "default": "#F3B8CE" },
+
+    { "type": "header", "content": "Halo décoratif" },
+    { "type": "checkbox", "id": "show_glow", "label": "Afficher le halo dans les cartes", "default": true },
+    { "type": "color", "id": "glow_color", "label": "Couleur du halo", "default": "#C94577" },
+    { "type": "range", "id": "glow_opacity", "label": "Intensité du halo", "min": 10, "max": 100, "step": 5, "unit": "%", "default": 35 },
+
+    { "type": "header", "content": "Mise en forme" },
+    { "type": "checkbox", "id": "show_shadow", "label": "Afficher l'ombre des cartes", "default": false },
+    { "type": "range", "id": "card_radius", "label": "Arrondi des cartes", "min": 0, "max": 36, "step": 2, "unit": "px", "default": 18 },
+    { "type": "range", "id": "padding_top", "label": "Espace au-dessus", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "label": "Espace en dessous", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 60 },
+
+    { "type": "header", "content": "Polices" },
+    { "type": "checkbox", "id": "use_custom_fonts", "label": "Charger Host Grotesk + Playfair Display", "info": "Décochez pour utiliser la police de votre thème", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "bonus",
+      "name": "Carte bonus",
+      "settings": [
+        { "type": "text", "id": "tag", "label": "Badge", "default": "🎁 Bonus 1 — E-book" },
+        {
+          "type": "textarea",
+          "id": "title",
+          "label": "Titre",
+          "info": "Entourez un mot de *astérisques* pour l'italique rose",
+          "default": "50 phrases pour vendre vos prestations *sans forcer.*"
+        },
+        { "type": "textarea", "id": "text", "label": "Texte", "default": "Le bon mot au bon moment : des formulations testées pour transformer vos abonnées en clientes, en douceur et sans jamais paraître insistante." },
+        { "type": "text", "id": "mention", "label": "Mention en bas de carte", "default": "Offert avec le pack" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bonus offerts",
+      "blocks": [
+        {
+          "type": "bonus",
+          "settings": {
+            "tag": "🎁 Bonus 1 — E-book",
+            "title": "50 phrases pour vendre vos prestations *sans forcer.*",
+            "text": "Le bon mot au bon moment : des formulations testées pour transformer vos abonnées en clientes, en douceur et sans jamais paraître insistante.",
+            "mention": "Offert avec le pack"
+          }
+        },
+        {
+          "type": "bonus",
+          "settings": {
+            "tag": "🎁 Bonus 2 — E-book",
+            "title": "30 scripts de Reels *prêts à tourner.*",
+            "text": "Ouvrez, lisez, filmez. Chaque script inclut le hook, le déroulé et l'appel à l'action pour maximiser votre portée et attirer de nouvelles clientes.",
+            "mention": "Offert avec le pack"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

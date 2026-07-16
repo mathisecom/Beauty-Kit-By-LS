@@ -1,0 +1,291 @@
+{% comment %}
+  ============================================================
+  SECTION : Aperçu des templates (cartes)
+  ------------------------------------------------------------
+  Installation :
+  1. Shopify admin → Boutique en ligne → Thèmes → ⋯ → Modifier le code
+  2. Dossier "Sections" → "Ajouter une nouvelle section"
+  3. Nommer : apercu-templates → coller tout ce fichier → Enregistrer
+  4. Éditeur de thème → "Ajouter une section" → "Aperçu des templates"
+  ------------------------------------------------------------
+  Chaque carte est un bloc : dégradé de fond, mini-mockup
+  (sur-titre, titre italique, bouton), titre + flèche, badges.
+  Vous pouvez aussi remplacer le mockup par votre propre image.
+  ============================================================
+{% endcomment %}
+
+{%- liquid
+  assign sid = section.id
+  assign use_fonts = section.settings.use_custom_fonts
+  assign ms = section.settings.mobile_scale | divided_by: 100.0
+-%}
+
+{%- if use_fonts -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+{%- endif -%}
+
+<style>
+  #tpl-{{ sid }}{
+    --tp-bg: {{ section.settings.page_bg }};
+    --tp-ink: {{ section.settings.text_color }};
+    --tp-muted: {{ section.settings.muted_color }};
+    --tp-accent: {{ section.settings.accent_color }};
+    --tp-pill-line: {{ section.settings.pill_border_color }};
+    --tp-pill-bg: {{ section.settings.pill_bg_color }};
+    --tp-mock-bg: {{ section.settings.mock_bg_color }};
+    --tp-mock-btn: {{ section.settings.mock_btn_color }};
+    --tp-mock-btn-txt: {{ section.settings.mock_btn_text_color }};
+    background:var(--tp-bg);
+    padding:{{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    {%- if use_fonts -%}
+    font-family:'Host Grotesk',sans-serif;
+    {%- endif -%}
+    color:var(--tp-ink);
+    line-height:1.6;
+  }
+  #tpl-{{ sid }} *{margin:0;padding:0;box-sizing:border-box}
+  #tpl-{{ sid }} .tp-wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+  #tpl-{{ sid }} .tp-grid{
+    display:grid;
+    grid-template-columns:repeat({{ section.settings.columns }},1fr);
+    gap:{{ section.settings.grid_gap }}px;
+  }
+
+  /* ---- Carte ---- */
+  #tpl-{{ sid }} .tp-card{display:block;text-decoration:none;color:inherit}
+  #tpl-{{ sid }} .tp-visual{
+    border-radius:{{ section.settings.card_radius }}px;
+    height:{{ section.settings.visual_height }}px;
+    position:relative;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+    transition:transform .35s ease{% if section.settings.show_shadow %},box-shadow .35s ease{% endif %};
+  }
+  #tpl-{{ sid }} .tp-card:hover .tp-visual{
+    transform:translateY(-6px);
+    {%- if section.settings.show_shadow -%}
+    box-shadow:0 24px 60px -28px rgba(34,24,32,.22);
+    {%- endif -%}
+  }
+  #tpl-{{ sid }} .tp-visual img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  }
+
+  /* ---- Mini-mockup ---- */
+  #tpl-{{ sid }} .tp-mock{
+    width:{{ section.settings.mock_width }}px;max-width:78%;
+    background:var(--tp-mock-bg);border-radius:14px;
+    {%- if section.settings.show_mock_shadow -%}
+    box-shadow:0 20px 50px -18px rgba(34,24,32,.3);
+    {%- endif -%}
+    padding:14px;text-align:center;position:relative;
+    transform:rotate({{ section.settings.mock_rotate }}deg);
+    transition:transform .35s ease;
+  }
+  #tpl-{{ sid }} .tp-card:hover .tp-mock{transform:rotate(0deg) scale(1.03)}
+  #tpl-{{ sid }} .tp-mock .m-tag{
+    font-size:{{ section.settings.size_mock_tag }}px;
+    font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+    display:block;margin-bottom:8px;
+  }
+  #tpl-{{ sid }} .tp-mock .m-ttl{
+    {%- if use_fonts -%}
+    font-family:'Playfair Display',serif;
+    {%- endif -%}
+    font-style:italic;font-weight:500;
+    font-size:{{ section.settings.size_mock_title }}px;
+    line-height:1.35;display:block;margin-bottom:10px;color:var(--tp-ink);
+  }
+  #tpl-{{ sid }} .tp-mock .m-btn{
+    display:inline-block;background:var(--tp-mock-btn);color:var(--tp-mock-btn-txt);
+    font-size:{{ section.settings.size_mock_btn }}px;
+    letter-spacing:.12em;text-transform:uppercase;font-weight:500;
+    padding:6px 14px;border-radius:999px;
+  }
+
+  /* ---- Meta + badges ---- */
+  #tpl-{{ sid }} .tp-meta{
+    display:flex;align-items:center;gap:8px;
+    margin:16px 4px 8px;font-weight:500;
+    font-size:{{ section.settings.size_meta }}px;
+  }
+  #tpl-{{ sid }} .tp-meta .arrow{transition:transform .25s ease;color:var(--tp-accent)}
+  #tpl-{{ sid }} .tp-card:hover .tp-meta .arrow{transform:translate(3px,-3px)}
+  #tpl-{{ sid }} .tp-pills{display:flex;gap:8px;padding:0 4px;flex-wrap:wrap}
+  #tpl-{{ sid }} .tp-pills i{
+    font-style:normal;font-weight:500;letter-spacing:.06em;
+    font-size:{{ section.settings.size_pill }}px;
+    border:1px solid var(--tp-pill-line);border-radius:999px;
+    padding:4px 12px;color:var(--tp-muted);background:var(--tp-pill-bg);
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width:990px){
+    #tpl-{{ sid }} .tp-grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:640px){
+    #tpl-{{ sid }} .tp-wrap{padding:0 16px}
+    #tpl-{{ sid }} .tp-grid{grid-template-columns:1fr;gap:calc({{ section.settings.grid_gap }}px * 1.1)}
+    #tpl-{{ sid }} .tp-visual{height:calc({{ section.settings.visual_height }}px * .9)}
+    #tpl-{{ sid }} .tp-meta{font-size:calc({{ section.settings.size_meta }}px * {{ ms }})}
+    #tpl-{{ sid }} .tp-pills i{font-size:calc({{ section.settings.size_pill }}px * {{ ms }})}
+    #tpl-{{ sid }} .tp-mock .m-tag{font-size:calc({{ section.settings.size_mock_tag }}px * {{ ms }})}
+    #tpl-{{ sid }} .tp-mock .m-ttl{font-size:calc({{ section.settings.size_mock_title }}px * {{ ms }})}
+    #tpl-{{ sid }} .tp-mock .m-btn{font-size:calc({{ section.settings.size_mock_btn }}px * {{ ms }})}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #tpl-{{ sid }} *{transition:none!important}
+  }
+</style>
+
+<div id="tpl-{{ sid }}">
+  <div class="tp-wrap">
+    <div class="tp-grid">
+      {%- for block in section.blocks -%}
+      {%- liquid
+        assign tag_el = 'div'
+        if block.settings.link != blank
+          assign tag_el = 'a'
+        endif
+      -%}
+      <{{ tag_el }} class="tp-card" {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %} {{ block.shopify_attributes }}>
+        <div class="tp-visual" style="background:linear-gradient(155deg,{{ block.settings.grad_1 }},{{ block.settings.grad_2 }})">
+          {%- if block.settings.image != blank -%}
+            <img src="{{ block.settings.image | image_url: width: 900 }}" alt="{{ block.settings.meta_title | escape }}" loading="lazy" width="900" height="600">
+          {%- else -%}
+            <div class="tp-mock">
+              {%- if block.settings.mock_tag != blank -%}
+              <span class="m-tag" style="color:{{ block.settings.mock_tag_color }}">{{ block.settings.mock_tag }}</span>
+              {%- endif -%}
+              {%- if block.settings.mock_title != blank -%}
+              <span class="m-ttl">{{ block.settings.mock_title }}</span>
+              {%- endif -%}
+              {%- if block.settings.mock_btn != blank -%}
+              <span class="m-btn">{{ block.settings.mock_btn }}</span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+        {%- if block.settings.meta_title != blank -%}
+        <div class="tp-meta">{{ block.settings.meta_title }} <span class="arrow">&#8599;</span></div>
+        {%- endif -%}
+        {%- if block.settings.pill_1 != blank or block.settings.pill_2 != blank -%}
+        <div class="tp-pills">
+          {%- if block.settings.pill_1 != blank -%}<i>{{ block.settings.pill_1 }}</i>{%- endif -%}
+          {%- if block.settings.pill_2 != blank -%}<i>{{ block.settings.pill_2 }}</i>{%- endif -%}
+        </div>
+        {%- endif -%}
+      </{{ tag_el }}>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Aperçu des templates",
+  "tag": "section",
+  "class": "section-apercu-templates",
+  "settings": [
+    { "type": "header", "content": "Grille" },
+    { "type": "range", "id": "columns", "label": "Colonnes sur PC", "min": 2, "max": 4, "step": 1, "default": 3 },
+    { "type": "range", "id": "grid_gap", "label": "Espace entre les cartes", "min": 12, "max": 48, "step": 2, "unit": "px", "default": 26 },
+    { "type": "range", "id": "visual_height", "label": "Hauteur des visuels", "min": 220, "max": 480, "step": 10, "unit": "px", "default": 320 },
+    { "type": "range", "id": "card_radius", "label": "Arrondi des visuels", "min": 0, "max": 36, "step": 2, "unit": "px", "default": 18 },
+
+    { "type": "header", "content": "Mini-mockup" },
+    { "type": "range", "id": "mock_width", "label": "Largeur du mockup", "min": 150, "max": 260, "step": 5, "unit": "px", "default": 190 },
+    { "type": "range", "id": "mock_rotate", "label": "Inclinaison du mockup", "min": -8, "max": 8, "step": 1, "unit": "°", "default": -3 },
+    { "type": "checkbox", "id": "show_mock_shadow", "label": "Ombre sous le mockup", "default": true },
+
+    { "type": "header", "content": "Typographie (tailles en px)" },
+    { "type": "range", "id": "size_meta", "label": "Titres des cartes", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "size_pill", "label": "Badges", "min": 8, "max": 16, "step": 1, "unit": "px", "default": 11 },
+    { "type": "range", "id": "size_mock_tag", "label": "Sur-titre du mockup", "min": 7, "max": 14, "step": 1, "unit": "px", "default": 9 },
+    { "type": "range", "id": "size_mock_title", "label": "Titre du mockup", "min": 10, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "size_mock_btn", "label": "Bouton du mockup", "min": 7, "max": 14, "step": 1, "unit": "px", "default": 9 },
+    { "type": "range", "id": "mobile_scale", "label": "Échelle des textes sur mobile", "min": 70, "max": 100, "step": 5, "unit": "%", "default": 90 },
+
+    { "type": "header", "content": "Couleurs" },
+    { "type": "color", "id": "page_bg", "label": "Fond de la section", "default": "#F3EEEF" },
+    { "type": "color", "id": "text_color", "label": "Texte principal", "default": "#221820" },
+    { "type": "color", "id": "muted_color", "label": "Texte des badges", "default": "#6F6068" },
+    { "type": "color", "id": "accent_color", "label": "Flèche ↗", "default": "#C94577" },
+    { "type": "color", "id": "pill_bg_color", "label": "Fond des badges", "default": "#FFFFFF" },
+    { "type": "color", "id": "pill_border_color", "label": "Bordure des badges", "default": "#E7DDE1" },
+    { "type": "color", "id": "mock_bg_color", "label": "Fond du mockup", "default": "#FFFFFF" },
+    { "type": "color", "id": "mock_btn_color", "label": "Bouton du mockup", "default": "#221820" },
+    { "type": "color", "id": "mock_btn_text_color", "label": "Texte du bouton du mockup", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Mise en forme" },
+    { "type": "checkbox", "id": "show_shadow", "label": "Ombre des cartes au survol", "default": false },
+    { "type": "range", "id": "padding_top", "label": "Espace au-dessus", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "label": "Espace en dessous", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 60 },
+
+    { "type": "header", "content": "Polices" },
+    { "type": "checkbox", "id": "use_custom_fonts", "label": "Charger Host Grotesk + Playfair Display", "info": "Décochez pour utiliser la police de votre thème", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Carte template",
+      "settings": [
+        { "type": "header", "content": "Visuel" },
+        { "type": "color", "id": "grad_1", "label": "Dégradé — couleur 1", "default": "#FBE7EE" },
+        { "type": "color", "id": "grad_2", "label": "Dégradé — couleur 2", "default": "#F3C9DA" },
+        { "type": "image_picker", "id": "image", "label": "Image personnalisée (optionnel)", "info": "Remplace le dégradé et le mockup" },
+
+        { "type": "header", "content": "Mini-mockup" },
+        { "type": "text", "id": "mock_tag", "label": "Sur-titre", "default": "Avant / Après" },
+        { "type": "color", "id": "mock_tag_color", "label": "Couleur du sur-titre", "default": "#C94577" },
+        { "type": "text", "id": "mock_title", "label": "Titre", "default": "Le résultat qui fait réserver vos clientes" },
+        { "type": "text", "id": "mock_btn", "label": "Texte du bouton", "default": "Je réserve" },
+
+        { "type": "header", "content": "Sous la carte" },
+        { "type": "text", "id": "meta_title", "label": "Titre de la carte", "default": "Posts prestations" },
+        { "type": "url", "id": "link", "label": "Lien de la carte" },
+        { "type": "text", "id": "pill_1", "label": "Badge 1", "default": "Post" },
+        { "type": "text", "id": "pill_2", "label": "Badge 2", "default": "Feed" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Aperçu des templates",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "grad_1": "#FBE7EE", "grad_2": "#F3C9DA",
+            "mock_tag": "Avant / Après", "mock_tag_color": "#C94577",
+            "mock_title": "Le résultat qui fait réserver vos clientes",
+            "mock_btn": "Je réserve",
+            "meta_title": "Posts prestations", "pill_1": "Post", "pill_2": "Feed"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "grad_1": "#FDF4EA", "grad_2": "#F1DCC1",
+            "mock_tag": "Offre limitée", "mock_tag_color": "#C94577",
+            "mock_title": "−20 % sur votre pose complète cette semaine",
+            "mock_btn": "J'en profite",
+            "meta_title": "Offres promotionnelles", "pill_1": "Story", "pill_2": "Promo"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "grad_1": "#F3EAF6", "grad_2": "#E1CDE9",
+            "mock_tag": "Script Reel", "mock_tag_color": "#A96FB8",
+            "mock_title": "« 3 erreurs qui abîment vos cils… »",
+            "mock_btn": "Hook inclus",
+            "meta_title": "Reels qui attirent", "pill_1": "Reel", "pill_2": "Script"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

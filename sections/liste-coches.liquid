@@ -1,0 +1,188 @@
+{% comment %}
+  ============================================================
+  SECTION : Liste à coches (contenu du pack — fiche produit)
+  ------------------------------------------------------------
+  Installation :
+  1. Shopify admin → Boutique en ligne → Thèmes → ⋯ → Modifier le code
+  2. Dossier "Sections" → "Ajouter une nouvelle section"
+  3. Nommer : liste-coches → coller tout ce fichier → Enregistrer
+  4. Éditeur de thème → ouvrez votre PAGE PRODUIT (Produits →
+     Produit par défaut) → "Ajouter une section" → "Liste à coches"
+     et placez-la où vous voulez dans la fiche.
+  ------------------------------------------------------------
+  Chaque ligne est un bloc : coche rose ✓ ou emoji (🎁, ⭐, …),
+  texte libre. Tout est réglable : tailles, couleurs, espacements.
+  ============================================================
+{% endcomment %}
+
+{%- liquid
+  assign sid = section.id
+  assign use_fonts = section.settings.use_custom_fonts
+  assign ms = section.settings.mobile_scale | divided_by: 100.0
+-%}
+
+{%- if use_fonts -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+{%- endif -%}
+
+<style>
+  #list-{{ sid }}{
+    --ls-page: {{ section.settings.page_bg }};
+    --ls-ink: {{ section.settings.text_color }};
+    --ls-line: {{ section.settings.line_color }};
+    --ls-check-bg: {{ section.settings.check_bg }};
+    --ls-check: {{ section.settings.check_color }};
+    background:var(--ls-page);
+    padding:{{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    {%- if use_fonts -%}
+    font-family:'Host Grotesk',sans-serif;
+    {%- endif -%}
+    color:var(--ls-ink);
+    line-height:1.6;
+  }
+  #list-{{ sid }} *{margin:0;padding:0;box-sizing:border-box}
+  #list-{{ sid }} .ls-wrap{
+    max-width:{{ section.settings.list_width }}px;
+    margin:0 auto;padding:0 24px;
+    {%- if section.settings.align == 'left' -%}
+    margin-left:0;
+    {%- endif -%}
+  }
+  #list-{{ sid }} ul{list-style:none}
+  #list-{{ sid }} li{
+    display:flex;gap:14px;align-items:flex-start;
+    padding:{{ section.settings.row_padding }}px 0;
+    font-size:{{ section.settings.size_text }}px;
+    font-weight:{{ section.settings.weight_text }};
+    border-bottom:{{ section.settings.line_width }}px {{ section.settings.line_style }} var(--ls-line);
+  }
+  #list-{{ sid }} li:last-child{border-bottom:none}
+  #list-{{ sid }} .ls-ck{
+    flex-shrink:0;
+    width:{{ section.settings.check_size }}px;height:{{ section.settings.check_size }}px;
+    border-radius:50%;margin-top:1px;
+    background:var(--ls-check-bg);color:var(--ls-check);
+    display:flex;align-items:center;justify-content:center;
+    font-size:calc({{ section.settings.check_size }}px * .55);
+    font-weight:700;line-height:1;
+  }
+  #list-{{ sid }} .ls-emoji{
+    flex-shrink:0;
+    width:{{ section.settings.check_size }}px;
+    font-size:calc({{ section.settings.check_size }}px * .8);
+    line-height:{{ section.settings.check_size }}px;
+    text-align:center;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width:640px){
+    #list-{{ sid }} .ls-wrap{padding:0 16px}
+    #list-{{ sid }} li{
+      font-size:calc({{ section.settings.size_text }}px * {{ ms }});
+      padding:calc({{ section.settings.row_padding }}px * .85) 0;
+      gap:11px;
+    }
+    #list-{{ sid }} .ls-ck{
+      width:calc({{ section.settings.check_size }}px * .9);
+      height:calc({{ section.settings.check_size }}px * .9);
+      font-size:calc({{ section.settings.check_size }}px * .5);
+    }
+    #list-{{ sid }} .ls-emoji{
+      width:calc({{ section.settings.check_size }}px * .9);
+      font-size:calc({{ section.settings.check_size }}px * .72);
+      line-height:calc({{ section.settings.check_size }}px * .9);
+    }
+  }
+</style>
+
+<div id="list-{{ sid }}">
+  <div class="ls-wrap">
+    {%- if section.blocks.size > 0 -%}
+    <ul>
+      {%- for block in section.blocks -%}
+      <li {{ block.shopify_attributes }}>
+        {%- if block.settings.emoji != blank -%}
+          <span class="ls-emoji" aria-hidden="true">{{ block.settings.emoji }}</span>
+        {%- else -%}
+          <span class="ls-ck" aria-hidden="true">&#10003;</span>
+        {%- endif -%}
+        <span>{{ block.settings.text }}</span>
+      </li>
+      {%- endfor -%}
+    </ul>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Liste à coches",
+  "tag": "section",
+  "class": "section-liste-coches",
+  "settings": [
+    { "type": "header", "content": "Typographie (tailles en px)" },
+    { "type": "range", "id": "size_text", "label": "Texte des lignes", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 15 },
+    { "type": "select", "id": "weight_text", "label": "Graisse du texte", "default": "400", "options": [
+      { "value": "400", "label": "Normale (400)" },
+      { "value": "500", "label": "Moyenne (500)" },
+      { "value": "600", "label": "Semi-gras (600)" }
+    ] },
+    { "type": "range", "id": "mobile_scale", "label": "Échelle des textes sur mobile", "min": 70, "max": 100, "step": 5, "unit": "%", "default": 95 },
+
+    { "type": "header", "content": "Coches et lignes" },
+    { "type": "range", "id": "check_size", "label": "Taille des coches / emojis", "min": 14, "max": 34, "step": 1, "unit": "px", "default": 20 },
+    { "type": "range", "id": "row_padding", "label": "Hauteur des lignes", "min": 6, "max": 24, "step": 1, "unit": "px", "default": 12 },
+    { "type": "select", "id": "line_style", "label": "Style du séparateur", "default": "dashed", "options": [
+      { "value": "dashed", "label": "Pointillés" },
+      { "value": "solid", "label": "Trait plein" },
+      { "value": "dotted", "label": "Points" }
+    ] },
+    { "type": "range", "id": "line_width", "label": "Épaisseur du séparateur", "min": 0, "max": 3, "step": 1, "unit": "px", "default": 1 },
+
+    { "type": "header", "content": "Couleurs" },
+    { "type": "color", "id": "page_bg", "label": "Fond de la section", "default": "#FFFFFF" },
+    { "type": "color", "id": "text_color", "label": "Texte", "default": "#221820" },
+    { "type": "color", "id": "line_color", "label": "Séparateurs", "default": "#E7DDE1" },
+    { "type": "color", "id": "check_bg", "label": "Fond des coches", "default": "#F6DEE8" },
+    { "type": "color", "id": "check_color", "label": "Symbole ✓", "default": "#C94577" },
+
+    { "type": "header", "content": "Mise en forme" },
+    { "type": "range", "id": "list_width", "label": "Largeur maximale de la liste", "min": 320, "max": 900, "step": 20, "unit": "px", "default": 520 },
+    { "type": "select", "id": "align", "label": "Alignement", "default": "center", "options": [
+      { "value": "center", "label": "Centré" },
+      { "value": "left", "label": "À gauche" }
+    ] },
+    { "type": "range", "id": "padding_top", "label": "Espace au-dessus", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_bottom", "label": "Espace en dessous", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 24 },
+
+    { "type": "header", "content": "Polices" },
+    { "type": "checkbox", "id": "use_custom_fonts", "label": "Charger Host Grotesk", "info": "Décochez pour utiliser la police de votre thème", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "ligne",
+      "name": "Ligne",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Texte", "default": "30 templates de posts Instagram & Facebook" },
+        { "type": "text", "id": "emoji", "label": "Emoji à la place de la coche (optionnel)", "info": "Ex : 🎁 — laissez vide pour la coche ✓" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Liste à coches",
+      "blocks": [
+        { "type": "ligne", "settings": { "text": "30 templates de posts Instagram & Facebook" } },
+        { "type": "ligne", "settings": { "text": "30 templates de stories" } },
+        { "type": "ligne", "settings": { "text": "10 templates d'offres promotionnelles" } },
+        { "type": "ligne", "settings": { "text": "30 scripts de Reels avec hooks" } },
+        { "type": "ligne", "settings": { "text": "50 phrases de vente sans forcer" } },
+        { "type": "ligne", "settings": { "text": "E-book « 50 phrases pour vendre »", "emoji": "🎁" } },
+        { "type": "ligne", "settings": { "text": "E-book « 30 scripts de Reels prêts à tourner »", "emoji": "🎁" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

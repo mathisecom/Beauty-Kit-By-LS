@@ -244,7 +244,7 @@
         "button_label": "Obtenir le pack",
         "button_link": "#shopify-section-template--22122118742270__featured_product_QNnQGY",
         "exclusive_accordion": false,
-        "use_custom_fonts": true,
+        "use_custom_fonts": false,
         "size_title": 27,
         "weight_title": "600",
         "size_eyebrow": 10,
@@ -402,7 +402,7 @@
       "name": "Statement + statistiques",
       "settings": {
         "heading": "Un contenu soigné attire vos clientes *avant même* le premier rendez-vous.",
-        "size_title": 28,
+        "size_title": 32,
         "weight_title": "500",
         "size_number": 32,
         "size_card_text": 14,

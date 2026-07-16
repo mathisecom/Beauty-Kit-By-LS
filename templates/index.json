@@ -162,14 +162,14 @@
       "name": "Scrolling text",
       "settings": {
         "full_width": true,
-        "text": "Aperçu des",
+        "text": "Aperçu des Templates -",
         "text_size": "small",
         "text_style": "fill",
         "scrolling_mode": "auto",
         "scrolling_speed": 7,
         "background": "",
         "background_gradient": "",
-        "text_color": "",
+        "text_color": "#C94577",
         "text_gradient": ""
       }
     },

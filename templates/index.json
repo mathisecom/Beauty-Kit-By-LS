@@ -780,6 +780,89 @@
         "input_text_color": ""
       }
     },
+    "liste_coches_CBtLR7": {
+      "type": "liste-coches",
+      "blocks": {
+        "ligne_zk4ybC": {
+          "type": "ligne",
+          "settings": {
+            "text": "30 templates de posts Instagram & Facebook",
+            "emoji": ""
+          }
+        },
+        "ligne_LaFqA3": {
+          "type": "ligne",
+          "settings": {
+            "text": "30 templates de stories",
+            "emoji": ""
+          }
+        },
+        "ligne_qnzHKq": {
+          "type": "ligne",
+          "settings": {
+            "text": "10 templates d'offres promotionnelles",
+            "emoji": ""
+          }
+        },
+        "ligne_babF7B": {
+          "type": "ligne",
+          "settings": {
+            "text": "30 scripts de Reels avec hooks",
+            "emoji": ""
+          }
+        },
+        "ligne_LarK8A": {
+          "type": "ligne",
+          "settings": {
+            "text": "50 phrases de vente sans forcer",
+            "emoji": ""
+          }
+        },
+        "ligne_698bUj": {
+          "type": "ligne",
+          "settings": {
+            "text": "E-book « 50 phrases pour vendre »",
+            "emoji": "🎁"
+          }
+        },
+        "ligne_qL6kqt": {
+          "type": "ligne",
+          "settings": {
+            "text": "E-book « 30 scripts de Reels prêts à tourner »",
+            "emoji": "🎁"
+          }
+        }
+      },
+      "block_order": [
+        "ligne_zk4ybC",
+        "ligne_LaFqA3",
+        "ligne_qnzHKq",
+        "ligne_babF7B",
+        "ligne_LarK8A",
+        "ligne_698bUj",
+        "ligne_qL6kqt"
+      ],
+      "name": "Liste à coches",
+      "settings": {
+        "size_text": 13,
+        "weight_text": "400",
+        "mobile_scale": 95,
+        "check_size": 19,
+        "row_padding": 10,
+        "line_style": "dashed",
+        "line_width": 1,
+        "page_bg": "#FFFFFF",
+        "text_color": "#221820",
+        "line_color": "#E7DDE1",
+        "check_bg": "#F6DEE8",
+        "check_color": "#C94577",
+        "list_width": 520,
+        "align": "center",
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "use_custom_fonts": true
+      }
+    },
     "faq": {
       "type": "faq",
       "blocks": {
@@ -889,6 +972,7 @@
     "testimonials_rxHCFe",
     "ebookoffert_pUn6cU",
     "featured_product_QNnQGY",
+    "liste_coches_CBtLR7",
     "faq",
     "ctafinal_LngjTF"
   ]

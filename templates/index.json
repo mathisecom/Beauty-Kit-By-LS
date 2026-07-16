@@ -154,7 +154,107 @@
         "show_shadow": false,
         "card_radius": 28,
         "padding_top": 24,
-        "padding_bottom": 24
+        "padding_bottom": 0
+      }
+    },
+    "scrolling_text_qXhGij": {
+      "type": "scrolling-text",
+      "name": "Scrolling text",
+      "settings": {
+        "full_width": true,
+        "text": "Aperçu des Templates",
+        "text_size": "small",
+        "text_style": "fill",
+        "scrolling_mode": "scroll",
+        "scrolling_speed": 10,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "text_gradient": ""
+      }
+    },
+    "apercutemplate_VtCpFV": {
+      "type": "apercutemplate",
+      "blocks": {
+        "card_rA4cUM": {
+          "type": "card",
+          "settings": {
+            "grad_1": "#fbe7ee",
+            "grad_2": "#f3c9da",
+            "mock_tag": "",
+            "mock_tag_color": "#c94577",
+            "mock_title": "",
+            "mock_btn": "",
+            "meta_title": "Posts prestations",
+            "link": "",
+            "pill_1": "Post",
+            "pill_2": "Feed"
+          }
+        },
+        "card_467gcE": {
+          "type": "card",
+          "settings": {
+            "grad_1": "#fdf4ea",
+            "grad_2": "#f1dcc1",
+            "mock_tag": "Offre limitée",
+            "mock_tag_color": "#c94577",
+            "mock_title": "−20 % sur votre pose complète cette semaine",
+            "mock_btn": "J'en profite",
+            "meta_title": "Offres promotionnelles",
+            "link": "",
+            "pill_1": "Story",
+            "pill_2": "Promo"
+          }
+        },
+        "card_zxczNY": {
+          "type": "card",
+          "settings": {
+            "grad_1": "#f3eaf6",
+            "grad_2": "#e1cde9",
+            "mock_tag": "Script Reel",
+            "mock_tag_color": "#a96fb8",
+            "mock_title": "« 3 erreurs qui abîment vos cils… »",
+            "mock_btn": "Hook inclus",
+            "meta_title": "Reels qui attirent",
+            "link": "",
+            "pill_1": "Reel",
+            "pill_2": "Script"
+          }
+        }
+      },
+      "block_order": [
+        "card_rA4cUM",
+        "card_467gcE",
+        "card_zxczNY"
+      ],
+      "name": "Aperçu des templates",
+      "settings": {
+        "columns": 3,
+        "grid_gap": 26,
+        "visual_height": 320,
+        "card_radius": 18,
+        "mock_width": 190,
+        "mock_rotate": -3,
+        "show_mock_shadow": true,
+        "size_meta": 16,
+        "size_pill": 11,
+        "size_mock_tag": 9,
+        "size_mock_title": 16,
+        "size_mock_btn": 9,
+        "mobile_scale": 90,
+        "page_bg": "#FFFFFF",
+        "text_color": "#221820",
+        "muted_color": "#6F6068",
+        "accent_color": "#C94577",
+        "pill_bg_color": "#FFFFFF",
+        "pill_border_color": "#E7DDE1",
+        "mock_bg_color": "#FFFFFF",
+        "mock_btn_color": "#221820",
+        "mock_btn_text_color": "#FFFFFF",
+        "show_shadow": false,
+        "padding_top": 16,
+        "padding_bottom": 60,
+        "use_custom_fonts": true
       }
     },
     "statsuniq_8qdECM": {
@@ -410,18 +510,18 @@
         "size_btn": 12,
         "size_note": 13,
         "mobile_scale": 80,
-        "page_bg": "#FFFFFF",
+        "page_bg": "#ffffff",
         "text_color": "#221820",
         "italic_color": "#221820",
-        "muted_color": "#6F6068",
-        "btn_bg": "#C94577",
+        "muted_color": "#6f6068",
+        "btn_bg": "#c94577",
         "btn_hover_bg": "#221820",
-        "btn_text_color": "#FFFFFF",
+        "btn_text_color": "#ffffff",
         "show_blob": true,
         "blob_animate": true,
-        "blob_color_1": "#F9C6D9",
-        "blob_color_2": "#F3D9B8",
-        "blob_color_3": "#E3C4F0",
+        "blob_color_1": "#f9c6d9",
+        "blob_color_2": "#f3d9b8",
+        "blob_color_3": "#e3c4f0",
         "blob_opacity": 45,
         "gap_sub_btn": 40,
         "btn_padding_v": 14,
@@ -435,6 +535,8 @@
   "order": [
     "slideshow",
     "packcontenue_DxQMJx",
+    "scrolling_text_qXhGij",
+    "apercutemplate_VtCpFV",
     "statsuniq_8qdECM",
     "featured_product_QNnQGY",
     "faq",

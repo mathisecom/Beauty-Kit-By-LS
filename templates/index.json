@@ -428,6 +428,98 @@
         "use_custom_fonts": false
       }
     },
+    "whypack_YcALWD": {
+      "type": "whypack",
+      "blocks": {
+        "avantage_DFGzBd": {
+          "type": "avantage",
+          "settings": {
+            "icon": "clock",
+            "title": "Gagnez du temps",
+            "text": "Plus besoin de créer chaque visuel de zéro : personnalisez et publiez en quelques minutes."
+          }
+        },
+        "avantage_7wJgQJ": {
+          "type": "avantage",
+          "settings": {
+            "icon": "calendar",
+            "title": "Publiez régulièrement",
+            "text": "Assez de contenu pour plusieurs mois, sans jamais manquer d'idées ni casser votre rythme."
+          }
+        },
+        "avantage_GVCDFN": {
+          "type": "avantage",
+          "settings": {
+            "icon": "star",
+            "title": "Valorisez vos prestations",
+            "text": "Des visuels qui mettent en avant votre savoir-faire, vos résultats et votre univers."
+          }
+        },
+        "avantage_xCjExE": {
+          "type": "avantage",
+          "settings": {
+            "icon": "arrow",
+            "title": "Des offres qui donnent envie",
+            "text": "Des promos structurées pour déclencher des réservations, pas seulement des likes."
+          }
+        },
+        "avantage_XYhAVm": {
+          "type": "avantage",
+          "settings": {
+            "icon": "person",
+            "title": "Attirez de nouvelles clientes",
+            "text": "Les bons hooks au bon endroit pour capter l'attention et élargir votre clientèle."
+          }
+        },
+        "avantage_Hy9HBR": {
+          "type": "avantage",
+          "settings": {
+            "icon": "chart",
+            "title": "Image plus professionnelle",
+            "text": "Un feed cohérent et soigné qui inspire confiance avant même le premier échange."
+          }
+        }
+      },
+      "block_order": [
+        "avantage_DFGzBd",
+        "avantage_7wJgQJ",
+        "avantage_GVCDFN",
+        "avantage_xCjExE",
+        "avantage_XYhAVm",
+        "avantage_Hy9HBR"
+      ],
+      "name": "Pourquoi ce pack",
+      "settings": {
+        "eyebrow_number": "",
+        "eyebrow_text": "",
+        "heading": "Moins de temps devant l'écran, *plus de clientes* en institut.",
+        "description": "Des solutions pensées pour les professionnelles de la beauté qui veulent développer leur visibilité sans y passer leurs soirées.",
+        "columns_desktop": "2",
+        "columns_mobile": "2",
+        "grid_gap_v": 44,
+        "grid_gap_h": 44,
+        "icon_size": 50,
+        "size_title": 33,
+        "weight_title": "600",
+        "size_eyebrow": 11,
+        "size_desc": 15,
+        "size_cell_title": 16,
+        "size_cell_text": 14,
+        "mobile_scale": 85,
+        "page_bg": "#FFFFFF",
+        "panel_bg": "#FFFFFF",
+        "text_color": "#221820",
+        "italic_color": "#221820",
+        "muted_color": "#6F6068",
+        "icon_color": "#221820",
+        "show_panel": true,
+        "show_shadow": false,
+        "panel_radius": 28,
+        "padding_top": 16,
+        "padding_bottom": 16,
+        "use_custom_fonts": false
+      }
+    },
     "rich_text_8PiMrP": {
       "type": "rich-text",
       "blocks": {
@@ -744,6 +836,7 @@
     "scrolling_text_qXhGij",
     "apercutemplate_VtCpFV",
     "statsuniq_8qdECM",
+    "whypack_YcALWD",
     "rich_text_8PiMrP",
     "testimonials_rxHCFe",
     "featured_product_QNnQGY",

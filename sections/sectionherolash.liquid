@@ -1,0 +1,338 @@
+{% comment %}
+  ============================================================
+  SECTION : Hero (blob dégradé + capsule + badges)
+  ------------------------------------------------------------
+  Installation :
+  1. Shopify admin → Boutique en ligne → Thèmes → ⋯ → Modifier le code
+  2. Dossier "Sections" → "Ajouter une nouvelle section"
+  3. Nommer : hero-pack → coller tout ce fichier → Enregistrer
+  4. Éditeur de thème → "Ajouter une section" → "Hero — Pack beauté"
+  ------------------------------------------------------------
+  Astuces pour le titre :
+  - Entourez un mot de *astérisques* → italique élégant.
+  - Écrivez [capsule] à l'endroit où placer la petite capsule
+    dégradée. Ex : Du contenu qui [capsule] *attire des clientes,*
+  - Un retour à la ligne crée un saut de ligne.
+  Les badges (Prothésistes ongulaires…) sont des blocs :
+  ajoutez-en, supprimez, réordonnez librement.
+  ============================================================
+{% endcomment %}
+
+{%- liquid
+  assign sid = section.id
+  assign use_fonts = section.settings.use_custom_fonts
+  assign ms = section.settings.mobile_scale | divided_by: 100.0
+-%}
+
+{%- if use_fonts -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+{%- endif -%}
+
+<style>
+  #hero-{{ sid }}{
+    --hr-bg: {{ section.settings.page_bg }};
+    --hr-ink: {{ section.settings.text_color }};
+    --hr-italic: {{ section.settings.italic_color }};
+    --hr-muted: {{ section.settings.muted_color }};
+    --hr-tag-bg: {{ section.settings.tag_bg }};
+    --hr-tag-line: {{ section.settings.tag_border }};
+    --hr-tag-txt: {{ section.settings.tag_text }};
+    --hr-btn-bg: {{ section.settings.btn_bg }};
+    --hr-btn-hover: {{ section.settings.btn_hover_bg }};
+    --hr-btn-txt: {{ section.settings.btn_text_color }};
+    background:var(--hr-bg);
+    position:relative;overflow:hidden;text-align:center;
+    padding:{{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    {%- if use_fonts -%}
+    font-family:'Host Grotesk',sans-serif;
+    {%- endif -%}
+    color:var(--hr-ink);
+    line-height:1.7;
+  }
+  #hero-{{ sid }} *{margin:0;padding:0;box-sizing:border-box}
+  #hero-{{ sid }} .hr-wrap{max-width:1200px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
+
+  /* ---- Blob ---- */
+  {%- if section.settings.show_blob -%}
+  #hero-{{ sid }} .hr-blob{
+    position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);
+    width:760px;height:520px;pointer-events:none;
+    filter:blur(60px);
+    opacity:{{ section.settings.blob_opacity | divided_by: 100.0 }};
+    background:
+      radial-gradient(220px 180px at 32% 40%, {{ section.settings.blob_color_1 }} 0%, transparent 70%),
+      radial-gradient(240px 200px at 68% 32%, {{ section.settings.blob_color_2 }} 0%, transparent 70%),
+      radial-gradient(230px 200px at 55% 70%, {{ section.settings.blob_color_3 }} 0%, transparent 70%);
+    {%- if section.settings.blob_animate -%}
+    animation:hr-drift-{{ sid }} 14s ease-in-out infinite alternate;
+    {%- endif -%}
+  }
+  @keyframes hr-drift-{{ sid }}{
+    from{transform:translate(-50%,-50%) rotate(-3deg) scale(1)}
+    to{transform:translate(-50%,-50%) rotate(4deg) scale(1.07)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #hero-{{ sid }} .hr-blob{animation:none}
+  }
+  {%- endif -%}
+
+  /* ---- Eyebrow ---- */
+  #hero-{{ sid }} .hr-eyebrow{
+    display:flex;align-items:center;justify-content:center;gap:14px;
+    font-size:{{ section.settings.size_eyebrow }}px;
+    font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--hr-muted);margin-bottom:22px;
+  }
+  #hero-{{ sid }} .hr-eyebrow .sep{height:1px;width:36px;background:var(--hr-muted);opacity:.4}
+  #hero-{{ sid }} .hr-eyebrow .n{color:var(--hr-ink)}
+
+  /* ---- Titre ---- */
+  #hero-{{ sid }} .hr-title{
+    font-weight:{{ section.settings.weight_title }};
+    font-size:{{ section.settings.size_title }}px;
+    line-height:1.12;letter-spacing:-.03em;
+    max-width:19em;margin:0 auto 30px;
+  }
+  #hero-{{ sid }} .hr-title em{
+    {%- if use_fonts -%}
+    font-family:'Playfair Display',serif;
+    {%- endif -%}
+    font-style:italic;font-weight:500;letter-spacing:0;
+    font-size:1.05em;color:var(--hr-italic);
+  }
+  #hero-{{ sid }} .hr-chip{
+    display:inline-block;vertical-align:middle;
+    width:1.85em;height:.95em;border-radius:999px;
+    background:linear-gradient(120deg,{{ section.settings.chip_color_1 }} 0%,{{ section.settings.chip_color_2 }} 40%,{{ section.settings.chip_color_3 }} 100%);
+    position:relative;overflow:hidden;margin:0 .08em;
+    box-shadow:inset 0 2px 6px rgba(255,255,255,.5), 0 8px 20px -6px rgba(201,69,119,.5);
+  }
+  #hero-{{ sid }} .hr-chip::after{
+    content:"";position:absolute;inset:0;
+    background:repeating-linear-gradient(115deg,transparent 0 8px,rgba(255,255,255,.35) 8px 12px);
+  }
+
+  /* ---- Sous-titre ---- */
+  #hero-{{ sid }} .hr-sub{
+    color:var(--hr-muted);
+    font-size:{{ section.settings.size_sub }}px;
+    max-width:36em;margin:0 auto 40px;
+  }
+
+  /* ---- Badges ---- */
+  #hero-{{ sid }} .hr-tags{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:42px}
+  #hero-{{ sid }} .hr-tags span{
+    background:var(--hr-tag-bg);border:1px solid var(--hr-tag-line);border-radius:999px;
+    padding:8px 18px;
+    font-size:{{ section.settings.size_tag }}px;
+    font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--hr-tag-txt);
+  }
+
+  /* ---- CTA ---- */
+  #hero-{{ sid }} .hr-cta{display:flex;justify-content:center;align-items:center;gap:22px;flex-wrap:wrap}
+  #hero-{{ sid }} .hr-btn{
+    display:inline-flex;align-items:center;gap:12px;
+    background:var(--hr-btn-bg);color:var(--hr-btn-txt);
+    font-size:{{ section.settings.size_btn }}px;
+    font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+    padding:14px 8px 14px 26px;border-radius:999px;text-decoration:none;
+    transition:background .25s ease,transform .25s ease;
+  }
+  #hero-{{ sid }} .hr-btn .arr{
+    width:32px;height:32px;border-radius:50%;
+    background:var(--hr-btn-txt);color:var(--hr-btn-bg);
+    display:flex;align-items:center;justify-content:center;
+    font-size:.9rem;transition:transform .25s ease;
+  }
+  #hero-{{ sid }} .hr-btn:hover{background:var(--hr-btn-hover);transform:translateY(-2px)}
+  #hero-{{ sid }} .hr-btn:hover .arr{transform:rotate(45deg)}
+  #hero-{{ sid }} .hr-note{
+    font-size:{{ section.settings.size_note }}px;
+    color:var(--hr-muted);
+  }
+  #hero-{{ sid }} .hr-note b{color:var(--hr-ink);font-weight:600}
+
+  /* ---- Responsive ---- */
+  @media (max-width:640px){
+    #hero-{{ sid }}{padding:calc({{ section.settings.padding_top }}px * .65) 0 calc({{ section.settings.padding_bottom }}px * .65)}
+    #hero-{{ sid }} .hr-wrap{padding:0 18px}
+    #hero-{{ sid }} .hr-blob{width:480px;height:400px}
+    #hero-{{ sid }} .hr-eyebrow{font-size:calc({{ section.settings.size_eyebrow }}px * {{ ms }});gap:10px}
+    #hero-{{ sid }} .hr-eyebrow .sep{width:22px}
+    #hero-{{ sid }} .hr-title{font-size:calc({{ section.settings.size_title }}px * {{ ms }})}
+    #hero-{{ sid }} .hr-sub{font-size:calc({{ section.settings.size_sub }}px * {{ ms }});margin-bottom:30px}
+    #hero-{{ sid }} .hr-tags{gap:8px;margin-bottom:32px}
+    #hero-{{ sid }} .hr-tags span{font-size:calc({{ section.settings.size_tag }}px * {{ ms }});padding:7px 14px}
+    #hero-{{ sid }} .hr-btn{font-size:calc({{ section.settings.size_btn }}px * {{ ms }})}
+    #hero-{{ sid }} .hr-note{font-size:calc({{ section.settings.size_note }}px * {{ ms }})}
+  }
+</style>
+
+{%- capture chip_html -%}<span class="hr-chip" aria-hidden="true"></span>{%- endcapture -%}
+
+<div id="hero-{{ sid }}">
+  {%- if section.settings.show_blob -%}
+  <div class="hr-blob" aria-hidden="true"></div>
+  {%- endif -%}
+  <div class="hr-wrap">
+
+    {%- if section.settings.eyebrow_number != blank or section.settings.eyebrow_text != blank -%}
+    <div class="hr-eyebrow">
+      {%- if section.settings.eyebrow_number != blank -%}<span class="n">{{ section.settings.eyebrow_number }}</span><span class="sep"></span>{%- endif -%}
+      <span>{{ section.settings.eyebrow_text }}</span>
+    </div>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+    <h1 class="hr-title">
+      {%- assign lines = section.settings.heading | newline_to_br | split: '<br />' -%}
+      {%- for line in lines -%}
+        {%- assign parts = line | split: '*' -%}
+        {%- for part in parts -%}
+          {%- assign idx = forloop.index0 | modulo: 2 -%}
+          {%- assign rendered = part | replace: '[capsule]', chip_html -%}
+          {%- if idx == 1 -%}<em>{{ rendered }}</em>{%- else -%}{{ rendered }}{%- endif -%}
+        {%- endfor -%}
+        {%- unless forloop.last -%}<br>{%- endunless -%}
+      {%- endfor -%}
+    </h1>
+    {%- endif -%}
+
+    {%- if section.settings.subheading != blank -%}
+    <p class="hr-sub">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+    <div class="hr-tags">
+      {%- for block in section.blocks -%}
+      <span {{ block.shopify_attributes }}>{{ block.settings.label }}</span>
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+
+    <div class="hr-cta">
+      {%- if section.settings.button_label != blank -%}
+      <a class="hr-btn" href="{{ section.settings.button_link | default: '#' }}">
+        {{ section.settings.button_label }}<span class="arr">&rarr;</span>
+      </a>
+      {%- endif -%}
+      {%- if section.settings.note != blank -%}
+      <span class="hr-note">
+        {%- assign nparts = section.settings.note | split: '*' -%}
+        {%- for part in nparts -%}
+          {%- assign nidx = forloop.index0 | modulo: 2 -%}
+          {%- if nidx == 1 -%}<b>{{ part }}</b>{%- else -%}{{ part }}{%- endif -%}
+        {%- endfor -%}
+      </span>
+      {%- endif -%}
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero — Pack beauté",
+  "tag": "section",
+  "class": "section-hero-pack",
+  "settings": [
+    { "type": "header", "content": "Sur-titre" },
+    { "type": "text", "id": "eyebrow_number", "label": "Numéro (ex : 01)", "default": "01" },
+    { "type": "text", "id": "eyebrow_text", "label": "Texte du sur-titre", "default": "Le pack réseaux sociaux beauté" },
+
+    { "type": "header", "content": "Titre" },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Titre",
+      "info": "*astérisques* = italique élégant · [capsule] = capsule dégradée · retour à la ligne = saut de ligne",
+      "default": "Du contenu qui [capsule] *attire des clientes,*\nsans chercher quoi publier."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Sous-titre",
+      "default": "150 templates et scripts prêts à personnaliser pour publier du contenu professionnel, mettre vos prestations en valeur et remplir votre agenda — sur Instagram et Facebook."
+    },
+
+    { "type": "header", "content": "Bouton et note" },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton", "default": "Je profite de l'offre" },
+    { "type": "url", "id": "button_link", "label": "Lien du bouton" },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note à côté du bouton",
+      "info": "*astérisques* = texte en gras. Ex : *39 €* au lieu de 59 €",
+      "default": "*39 €* au lieu de 59 € · Accès immédiat"
+    },
+
+    { "type": "header", "content": "Typographie (tailles en px)" },
+    { "type": "range", "id": "size_title", "label": "Titre", "min": 26, "max": 84, "step": 1, "unit": "px", "default": 58 },
+    { "type": "select", "id": "weight_title", "label": "Graisse du titre", "default": "600", "options": [
+      { "value": "400", "label": "Normale (400)" },
+      { "value": "500", "label": "Moyenne (500)" },
+      { "value": "600", "label": "Semi-gras (600)" },
+      { "value": "700", "label": "Gras (700)" }
+    ] },
+    { "type": "range", "id": "size_eyebrow", "label": "Sur-titre", "min": 8, "max": 18, "step": 1, "unit": "px", "default": 11 },
+    { "type": "range", "id": "size_sub", "label": "Sous-titre", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "size_tag", "label": "Badges", "min": 8, "max": 16, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "size_btn", "label": "Texte du bouton", "min": 9, "max": 18, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "size_note", "label": "Note à côté du bouton", "min": 9, "max": 18, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "mobile_scale", "label": "Échelle des textes sur mobile", "min": 55, "max": 100, "step": 5, "unit": "%", "default": 70 },
+
+    { "type": "header", "content": "Couleurs" },
+    { "type": "color", "id": "page_bg", "label": "Fond de la section", "default": "#F3EEEF" },
+    { "type": "color", "id": "text_color", "label": "Titre", "default": "#221820" },
+    { "type": "color", "id": "italic_color", "label": "Mots en italique", "default": "#221820" },
+    { "type": "color", "id": "muted_color", "label": "Sous-titre et note", "default": "#6F6068" },
+    { "type": "color", "id": "tag_bg", "label": "Fond des badges", "default": "#FFFFFF" },
+    { "type": "color", "id": "tag_border", "label": "Bordure des badges", "default": "#E7DDE1" },
+    { "type": "color", "id": "tag_text", "label": "Texte des badges", "default": "#6F6068" },
+    { "type": "color", "id": "btn_bg", "label": "Fond du bouton", "default": "#C94577" },
+    { "type": "color", "id": "btn_hover_bg", "label": "Fond du bouton au survol", "default": "#221820" },
+    { "type": "color", "id": "btn_text_color", "label": "Texte du bouton", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Capsule dégradée" },
+    { "type": "color", "id": "chip_color_1", "label": "Couleur 1", "default": "#C94577" },
+    { "type": "color", "id": "chip_color_2", "label": "Couleur 2", "default": "#E88BAF" },
+    { "type": "color", "id": "chip_color_3", "label": "Couleur 3", "default": "#D9A05B" },
+
+    { "type": "header", "content": "Blob dégradé" },
+    { "type": "checkbox", "id": "show_blob", "label": "Afficher le dégradé flou", "default": true },
+    { "type": "checkbox", "id": "blob_animate", "label": "Animer le dégradé", "default": true },
+    { "type": "color", "id": "blob_color_1", "label": "Couleur 1", "default": "#F9C6D9" },
+    { "type": "color", "id": "blob_color_2", "label": "Couleur 2", "default": "#F3D9B8" },
+    { "type": "color", "id": "blob_color_3", "label": "Couleur 3", "default": "#E3C4F0" },
+    { "type": "range", "id": "blob_opacity", "label": "Intensité du dégradé", "min": 10, "max": 100, "step": 5, "unit": "%", "default": 75 },
+
+    { "type": "header", "content": "Mise en forme" },
+    { "type": "range", "id": "padding_top", "label": "Espace au-dessus", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 112 },
+    { "type": "range", "id": "padding_bottom", "label": "Espace en dessous", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 120 },
+
+    { "type": "header", "content": "Polices" },
+    { "type": "checkbox", "id": "use_custom_fonts", "label": "Charger Host Grotesk + Playfair Display", "info": "Décochez pour utiliser la police de votre thème", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "tag",
+      "name": "Badge",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Texte du badge", "default": "Prothésistes ongulaires" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero — Pack beauté",
+      "blocks": [
+        { "type": "tag", "settings": { "label": "Prothésistes ongulaires" } },
+        { "type": "tag", "settings": { "label": "Lash techs" } },
+        { "type": "tag", "settings": { "label": "Esthéticiennes" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

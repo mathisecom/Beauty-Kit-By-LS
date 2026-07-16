@@ -293,6 +293,7 @@
           "settings": {
             "grad_1": "#fbe7ee",
             "grad_2": "#f3c9da",
+            "image": "shopify://shop_images/il_794xN.6947338394_gq55.webp",
             "mock_tag": "Avant / Après",
             "mock_tag_color": "#c94577",
             "mock_title": "Le résultat qui fait réserver vos clientes",
@@ -308,6 +309,7 @@
           "settings": {
             "grad_1": "#fdf4ea",
             "grad_2": "#f1dcc1",
+            "image": "shopify://shop_images/il_794xN.7913980682_r2xk.webp",
             "mock_tag": "Offre limitée",
             "mock_tag_color": "#c94577",
             "mock_title": "−20 % sur votre pose complète cette semaine",
@@ -323,6 +325,7 @@
           "settings": {
             "grad_1": "#f3eaf6",
             "grad_2": "#e1cde9",
+            "image": "shopify://shop_images/il_794xN.7874310181_lee3.webp",
             "mock_tag": "Script Reel",
             "mock_tag_color": "#a96fb8",
             "mock_title": "« 3 erreurs qui abîment vos cils… »",

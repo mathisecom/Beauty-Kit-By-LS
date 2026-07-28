@@ -787,28 +787,35 @@
           "type": "item",
           "settings": {
             "title": "Comment personnaliser les templates ?",
-            "content": "<p>Yes, we ship all over the world. Shipping costs will apply, and will be added at checkout. We run discounts and promotions all year, so stay tuned for exclusive deals.</p>"
+            "content": "<p>Après votre achat, vous recevrez immédiatement un lien de téléchargement. Ouvrez les templates dans Canva, puis personnalisez-les facilement : ajoutez votre logo, modifiez les couleurs, les textes, les photos et les polices selon votre identité visuelle. Aucun abonnement Canva Pro n’est nécessaire, sauf indication contraire.</p>"
           }
         },
         "166442457738b23caf-1": {
           "type": "item",
           "settings": {
             "title": "Le pack convient-il à mon activité ?",
-            "content": "<p>It depends on where you are. Orders processed here will take 5-7 business days to arrive. Overseas deliveries can take anywhere from 7-16 days. Delivery details will be provided in your confirmation email.</p>"
+            "content": "<p>Oui ! Ce pack est conçu pour les professionnels de la beauté souhaitant améliorer leur communication sur les réseaux sociaux.</p>"
           }
         },
         "166442457738b23caf-2": {
           "type": "item",
           "settings": {
             "title": "Quand vais-je recevoir le pack ?",
-            "content": "<p>You can contact us through our contact page! We will be happy to assist you.</p>"
+            "content": "<p> Votre pack est disponible immédiatement après la validation du paiement. Vous recevrez un e-mail contenant votre lien de téléchargement en quelques minutes.</p>"
           }
         },
         "item_VkdLEt": {
           "type": "item",
           "settings": {
             "title": "Est-ce un paiement unique ?",
-            "content": "<p>Write content to answer to common questions your customers may have about your products, shipping policies..</p>"
+            "content": "<p>Oui. Il s’agit d’un paiement unique. Une fois le pack acheté, il vous appartient définitivement. Aucun abonnement ni frais mensuels.</p>"
+          }
+        },
+        "item_faWh7V": {
+          "type": "item",
+          "settings": {
+            "title": "Est-ce un paiement unique ?",
+            "content": "<p>En raison de la nature numérique des produits, aucun remboursement ni échange ne pourra être effectué une fois le téléchargement effectué. Si vous rencontrez un problème avec votre commande, veuillez me contacter via le formulaire de contact.</p>"
           }
         }
       },
@@ -816,7 +823,8 @@
         "166442457738b23caf-0",
         "166442457738b23caf-1",
         "166442457738b23caf-2",
-        "item_VkdLEt"
+        "item_VkdLEt",
+        "item_faWh7V"
       ],
       "settings": {
         "full_width": true,

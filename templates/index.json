@@ -814,7 +814,7 @@
         "item_faWh7V": {
           "type": "item",
           "settings": {
-            "title": "Est-ce un paiement unique ?",
+            "title": "Les produits sont-elles remboursables ?",
             "content": "<p>En raison de la nature numérique des produits, aucun remboursement ni échange ne pourra être effectué une fois le téléchargement effectué. Si vous rencontrez un problème avec votre commande, veuillez me contacter via le formulaire de contact.</p>"
           }
         }
